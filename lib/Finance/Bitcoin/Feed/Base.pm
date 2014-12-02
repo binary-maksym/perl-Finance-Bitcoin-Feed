@@ -1,7 +1,7 @@
 package Finance::Bitcoin::Feed::Base;
 use strict;
 
-use Mojo::Base -base;
+use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
 
 has 'cv' => sub {AnyEvent->condvar;};

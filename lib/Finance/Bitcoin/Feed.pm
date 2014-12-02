@@ -2,8 +2,10 @@ package Finance::Bitcoin::Feed;
 use strict;
 
 use Mojo::Base 'Mojo::EventEmitter';
-use Finance::Bitcoin::Feed::Base;
+use AnyEvent;
+use Finance::Bitcoin::Feed::BitStamp;
 
+	
 sub new{
 	my $class = shift;
 	my $self = $class->SUPER::new();
@@ -12,9 +14,10 @@ sub new{
 }
 sub run{
 	my $self = shift;
-	#my $bitstamp = Finance::Bitcoin::Feed::BitStamp;
-	#$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
-	#$bitstamp->go;
+	my $bitstamp = Finance::Bitcoin::Feed::BitStamp->new();
+	$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
+	$bitstamp->go;
+	AnyEvent->condvar->recv;
 }
 
 

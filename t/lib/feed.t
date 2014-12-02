@@ -10,3 +10,4 @@ my $feed = Finance::Bitcoin::Feed->new();
 isa_ok($feed,Finance::Bitcoin::Feed);
 isa_ok($feed, Mojo::EventEmitter);
 ok($feed->has_subscribers('output'));
+
