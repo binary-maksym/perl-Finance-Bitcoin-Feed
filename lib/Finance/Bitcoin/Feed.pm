@@ -2,12 +2,10 @@ package Finance::Bitcoin::Feed;
 use strict;
 
 use Mojo::Base -base;
-use AnyEvent;
+use Finance::Bitcoin::Feed::Base;
 
-has 'cv' => sub {AnyEvent->condvar;};
+sub run{
 
-sub connect {
-	
 }
 
 
@@ -18,7 +16,7 @@ __END__
 
 =head1 NAME
 
-BitCoinFeed - Generate bitcoin real-time price from many sites' streaming data source
+Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' streaming data source
 
 
 =head1 VERSION
@@ -28,13 +26,9 @@ This document describes BitCoinFeed version 0.0.1
 
 =head1 SYNOPSIS
 
-    use Mojo::Base 'BitCoinFeed';
+    use Finance::Bitcoin::Feed;
 
-    sub connect{
-       my $self = shift;
-       .....
-       $self->SUPER::connect(@_);
-    }
+    Finance::Bitcoin::Feed->new->run();
 
 =for author to fill in:
     Brief code example(s) here showing commonest usage(s).
@@ -42,6 +36,12 @@ This document describes BitCoinFeed version 0.0.1
     so make it as educational and exeplary as possible.
   
 =head1 DESCRIPTION
+
+L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real time data source from other sites:
+  ws://api.hitbtc.com:80
+  wss://websocket.btcchina.com
+  ws://ws.pusherapp.com
+  https://plug.coinsetter.com:3000
 
 =for author to fill in:
     Write a full description of the module and its features here.
@@ -66,16 +66,6 @@ This document describes BitCoinFeed version 0.0.1
     suggested remedies.
 
 =over
-
-=item C<< Error message here, perhaps with %s placeholders >>
-
-[Description of error here]
-
-=item C<< Another error message here >>
-
-[Description of error here]
-
-[Et cetera, et cetera]
 
 =back
 
