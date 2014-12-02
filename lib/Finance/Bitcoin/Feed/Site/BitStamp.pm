@@ -21,8 +21,7 @@ package Finance::Bitcoin::Feed::BitStamp::Socket;
 
 use strict;
 use warnings;
-use Finance::BitStamp::Socket 0.01;
-use parent qw(Finance::BitStamp::Socket);
+use parent qw(Finance::Bitcoin::Feed::Pusher);
 
 sub new{
 	my $self = shift->SUPER::new(channels => [qw/live_trades/] );
