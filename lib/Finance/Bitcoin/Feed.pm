@@ -1,12 +1,21 @@
 package Finance::Bitcoin::Feed;
 use strict;
 
-use Mojo::Base -base;
+use Mojo::Base 'Mojo::EventEmitter';
 use Finance::Bitcoin::Feed::Base;
 
-sub run{
-
+sub new{
+	my $class = shift;
+	my $self = $class->SUPER::new();
+	$self->on('output',sub{shift; say @_});
 }
+sub run{
+	my $self = shift;
+	#my $bitstamp = Finance::Bitcoin::Feed::BitStamp;
+	#$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
+	#$bitstamp->go;
+}
+
 
 
 
@@ -28,7 +37,14 @@ This document describes BitCoinFeed version 0.0.1
 
     use Finance::Bitcoin::Feed;
 
+    #default output is to print to the stdout
     Finance::Bitcoin::Feed->new->run();
+
+    #or custom your stdout
+    my $feed = Finance::Bitcoin::Feed->new;
+    open  my $fh, ">out.txt";
+    $feed->on('output', sub{shift; print $fh @_,"\n"});
+
 
 =for author to fill in:
     Brief code example(s) here showing commonest usage(s).
