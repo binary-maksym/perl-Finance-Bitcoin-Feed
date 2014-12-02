@@ -1,4 +1,4 @@
-package Finance::Bitcoin::Feed;
+package Finance::Bitcoin::Feed::Base;
 use strict;
 
 use Mojo::Base -base;
@@ -18,7 +18,7 @@ __END__
 
 =head1 NAME
 
-BitCoinFeed - Generate bitcoin real-time price from many sites' streaming data source
+Finance::Bitcoin::Feed::Base - Base class of Finance::Bitcoin::Feed modules
 
 
 =head1 VERSION
@@ -28,7 +28,7 @@ This document describes BitCoinFeed version 0.0.1
 
 =head1 SYNOPSIS
 
-    use Mojo::Base 'BitCoinFeed';
+    use Mojo::Base 'Finance::Bitcoin::Feed::Base';
 
     sub connect{
        my $self = shift;
@@ -42,6 +42,8 @@ This document describes BitCoinFeed version 0.0.1
     so make it as educational and exeplary as possible.
   
 =head1 DESCRIPTION
+
+   It is a base class
 
 =for author to fill in:
     Write a full description of the module and its features here.
