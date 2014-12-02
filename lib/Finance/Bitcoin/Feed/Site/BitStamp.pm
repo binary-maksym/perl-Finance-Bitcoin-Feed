@@ -1,4 +1,4 @@
-package Finance::Bitcoin::Feed::BitStamp;
+package Finance::Bitcoin::Feed::Site::BitStamp;
 use strict;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 
