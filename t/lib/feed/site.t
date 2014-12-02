@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 use Test::More tests => 4;
 
 BEGIN {
@@ -6,7 +9,7 @@ BEGIN {
 
 my $obj = Finance::Bitcoin::Feed::Site->new();
 
-isa_ok($obj,Finance::Bitcoin::Feed::Site);
-isa_ok($obj->cv, AnyEvent::CondVar);
+isa_ok($obj,'Finance::Bitcoin::Feed::Site');
+isa_ok($obj->cv, 'AnyEvent::CondVar');
 can_ok($obj, 'go');
 
