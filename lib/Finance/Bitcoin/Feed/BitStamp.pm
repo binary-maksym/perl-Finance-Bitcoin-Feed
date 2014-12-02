@@ -1,6 +1,6 @@
 package Finance::Bitcoin::Feed::BitStamp;
 use strict;
-use Mojo::Base 'Finance::Bitcoin::Feed::Base';
+use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 
 has 'socket';
 

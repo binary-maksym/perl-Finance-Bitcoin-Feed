@@ -1,4 +1,4 @@
-package Finance::Bitcoin::Feed::Base;
+package Finance::Bitcoin::Feed::Site;
 use strict;
 
 use Mojo::Base 'Mojo::EventEmitter';
@@ -18,7 +18,7 @@ __END__
 
 =head1 NAME
 
-Finance::Bitcoin::Feed::Base - Base class of Finance::Bitcoin::Feed modules
+Finance::Bitcoin::Feed::Site - Base class of Finance::Bitcoin::Feed modules
 
 
 =head1 VERSION
@@ -28,7 +28,7 @@ This document describes BitCoinFeed version 0.0.1
 
 =head1 SYNOPSIS
 
-    use Mojo::Base 'Finance::Bitcoin::Feed::Base';
+    use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 
     sub connect{
        my $self = shift;
