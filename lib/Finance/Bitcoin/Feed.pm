@@ -8,6 +8,7 @@ sub new{
 	my $class = shift;
 	my $self = $class->SUPER::new();
 	$self->on('output',sub{shift; say @_});
+	return $self;
 }
 sub run{
 	my $self = shift;
