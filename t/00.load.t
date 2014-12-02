@@ -4,4 +4,4 @@ BEGIN {
 	use_ok( 'Finance::Bitcoin::Feed' );
 }
 
-diag( "Testing BitCoinFeed $BitCoinFeed::VERSION" );
+diag( "Testing Finance::Bitcoin::Feed $Finance::Bitcoin::Feed::VERSION" );
