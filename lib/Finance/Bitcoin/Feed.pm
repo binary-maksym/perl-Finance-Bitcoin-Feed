@@ -9,7 +9,7 @@ use Finance::Bitcoin::Feed::Site::BitStamp;
 sub new{
 	my $class = shift;
 	my $self = $class->SUPER::new();
-	$self->on('output',sub{shift; say @_});
+	$self->on('output',sub{shift; say join " ", @_});
 	return $self;
 }
 sub run{

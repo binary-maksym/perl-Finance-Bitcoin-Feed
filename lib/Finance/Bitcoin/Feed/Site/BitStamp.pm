@@ -32,7 +32,7 @@ sub new{
 sub trade {
     my $self = shift;
     my $data = shift;
-		$self->{owner}->emit('output', "BITSTAMP BTCUSD ", $data->{price});
+		$self->{owner}->emit('output', "BITSTAMP","BTCUSD", $data->{price});
 }
 
 sub go {
