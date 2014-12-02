@@ -14,7 +14,7 @@ use JSON;
 use URI;
 use Data::Dumper;
 
-use constant VERBOSE => 0;
+use constant VERBOSE => 1;
 use constant DEBUG   => 0;
 
 use constant CHANNELS => qw(
@@ -133,10 +133,9 @@ sub on_read {
                 my $e = $@;
                 warn $self->now . ' - error: ' . $e;
                 next;
-            };
-            given ($d->{event}) {
+						};
 
-                when ('pusher:connection_established') {
+                if($d->{event} eq 'pusher:connection_established') {
                     say $self->now . ' - subscribing to events' if VERBOSE;
                     foreach my $channel (@{$self->channels}) {
                         say $self->now . ' - requesting channel: ' . $channel if VERBOSE;
@@ -150,12 +149,12 @@ sub on_read {
                         );
                     }
                 }
-                when ('pusher_internal:subscription_succeeded') {
+                elsif ($d->{event} eq 'pusher_internal:subscription_succeeded') {
                     printf("%s - subscribed to channel: %s\n", $self->now, $d->{channel}) if VERBOSE;
                 }
 
 
-                when ('trade') {
+                elsif ($d->{event} eq 'trade') {
                     printf("%s - got %s request on channel: %s\n", $self->now, @{$d}{qw(event channel)}) if VERBOSE;
                     if ($d->{channel} eq 'live_trades') {
                         my $data = $self->json->decode($d->{data});
@@ -165,7 +164,7 @@ sub on_read {
                         printf "%s - got event: %s", $self->now, Dumper $d if VERBOSE;
                     }
                 }
-                when ('data') {
+                elsif ($d->{event} eq 'data') {
                     printf("%s - got %s request on channel: %s\n", $self->now, @{$d}{qw(event channel)}) if VERBOSE;
                     if ($d->{channel} eq 'order_book') {
                         my $data = $self->json->decode($d->{data});
@@ -176,10 +175,10 @@ sub on_read {
                     }
                 }
 
-                default {
+                else {
                     printf '%s - got event: %s', $self->now, Dumper $d if VERBOSE;
                 }
-            }
+
         }
     }
 }
@@ -309,6 +308,8 @@ socket through the Pusher service.
 
 This module is extracted from Finance::BitStamp::Socket v0.01. Please refer to 
 L<Finance::BitStamp::Socket>
+
+I cannot close its constant VERBOSE, so I copied it to my package directly.
 
 The BitStamp socket is the fastest any most bandwidth efficient way
 to maintain your own up to date tracking of all trades and market
