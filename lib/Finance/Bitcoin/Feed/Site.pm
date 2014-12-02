@@ -6,8 +6,8 @@ use AnyEvent;
 
 has 'cv' => sub {AnyEvent->condvar;};
 
-sub connect {
-	
+sub go {
+	#overload it
 }
 
 
@@ -30,10 +30,9 @@ This document describes BitCoinFeed version 0.0.1
 
     use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 
-    sub connect{
+    sub go{
        my $self = shift;
        .....
-       $self->SUPER::connect(@_);
     }
 
 =for author to fill in:
