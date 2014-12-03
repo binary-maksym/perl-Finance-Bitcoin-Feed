@@ -5,9 +5,54 @@ use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
 
 has 'cv' => sub {AnyEvent->condvar;};
+has last_activity_at => sub{time()};
+has last_activity_period => 60;
+has 'timer';
+has started => 0;
+
+sub new{
+	my $class = shift;
+	my $self = $class->SUPER::new(@_);
+	$self->on('timeout', \&on_timeout);
+
+
+	my $timer = AnyEvent->timer (
+      after => 0,    # first invoke ASAP
+      interval => 1, # then invoke every second
+      cb    => sub { # the callback to invoke
+				$self->timer_call_back;
+      },
+															);
+	$self->timer($timer);
+
+	
+	return $self;
+}
+
+sub timer_call_back{
+	my $self = shift;
+	return unless $self->started;
+	if($self->is_timeout){
+		$self->emit('timeout');
+	}
+	
+}
+
+sub is_timeout{
+	my $self = shift;
+	return time() - $self->last_activity_at > $self->last_activity_period;
+}
+
+sub on_timeout{
+	my $self = shift;
+	$self->go;
+}
+
 
 sub go {
-	#overload it
+	my $self = shift;
+	$self->started(1);
+	$self->last_activity_at(time());
 }
 
 
