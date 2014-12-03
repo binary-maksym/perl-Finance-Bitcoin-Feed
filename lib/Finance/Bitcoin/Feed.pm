@@ -4,7 +4,7 @@ use strict;
 use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
 use Finance::Bitcoin::Feed::Site::BitStamp;
-
+use Finance::Bitcoin::Feed::Site::Hitbtc;
 	
 sub new{
 	my $class = shift;
@@ -14,9 +14,15 @@ sub new{
 }
 sub run{
 	my $self = shift;
-	my $bitstamp = Finance::Bitcoin::Feed::Site::BitStamp->new();
-	$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
-	$bitstamp->go;
+	#my $bitstamp = Finance::Bitcoin::Feed::Site::BitStamp->new();
+	#$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
+	#$bitstamp->go;
+	#AnyEvent->condvar->recv;
+
+	my $hitbit = Finance::Bitcoin::Feed::Site::Hitbtc->new();
+	$hitbit->on('output',sub {shift, $self->emit('output',@_)});
+	$hitbit->go();
+
 	AnyEvent->condvar->recv;
 }
 
