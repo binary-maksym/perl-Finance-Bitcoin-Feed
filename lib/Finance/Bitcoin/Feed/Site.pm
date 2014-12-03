@@ -5,7 +5,7 @@ use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
 
 has 'cv' => sub {AnyEvent->condvar;};
-has last_activity_at => sub{time()};
+has last_activity_at => 0;
 has last_activity_period => 60;
 has 'timer';
 has started => 0;

@@ -10,10 +10,7 @@ BEGIN {
 }
 
 my $obj = Finance::Bitcoin::Feed::Site::Hitbtc->new();
-can_ok($obj, 'go');
 ok($obj->has_subscribers('json'),'has json subscribe');
-ok($obj->has_subscribers('timeout'),'has timeout subscribe');
-is($obj->started, 0, 'test not started');
 
 my $str = '';
 my $hash = {
@@ -48,6 +45,7 @@ lives_ok(sub{$obj->go;}, 'run go');
 is($obj->started, 1, 'started after go');
 ok($obj->is_timeout, 'set timeout');
 
+diag('testing connect success');
 #simulate connection succeed
 $str = '';
 $obj->started(0);
