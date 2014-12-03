@@ -11,6 +11,7 @@ use AnyEvent;
 
 has ws_url => 'ws://api.hitbtc.com';
 has ua => sub {Mojo::UserAgent->new};
+
 sub go{
 	my $self = shift;
 
@@ -19,19 +20,22 @@ sub go{
 									 say 'WebSocket handshake failed!' and return unless $tx->is_websocket; 
 									 $tx->on(json => sub {
 														 my ($tx, $hash) = @_;
-
-														 if ($hash->{MarketDataIncrementalRefresh}
-																 && scalar @{$hash->{MarketDataIncrementalRefresh}{trade}}) {
-															 for my $trade (@{$hash->{MarketDataIncrementalRefresh}{trade}}) {
-																 $self->emit('output', 'HITBTC', $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
-															 }
-														 }
-														 
+														 $self->on_json($hash);
 													 });
 								 })
 }
 
+sub on_json{
+	my ($self, $hash) = @_;
+
+	if ($hash->{MarketDataIncrementalRefresh}
+			&& scalar @{$hash->{MarketDataIncrementalRefresh}{trade}}) {
+		for my $trade (@{$hash->{MarketDataIncrementalRefresh}{trade}}) {
+			$self->emit('output', 'HITBTC', $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
+		}
+	}
+}
 
 1;
-__END__
+
 
