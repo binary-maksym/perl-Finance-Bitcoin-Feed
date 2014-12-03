@@ -12,6 +12,13 @@ use AnyEvent;
 has ws_url => 'ws://api.hitbtc.com';
 has ua => sub {Mojo::UserAgent->new};
 
+sub new{
+	my $class = shift;
+	my $self = $class->SUPER::new(@_);
+	$self->on('json',\&on_json);
+	return $self;
+}
+
 sub go{
 	my $self = shift;
 
@@ -20,7 +27,7 @@ sub go{
 									 say 'WebSocket handshake failed!' and return unless $tx->is_websocket; 
 									 $tx->on(json => sub {
 														 my ($tx, $hash) = @_;
-														 $self->on_json($hash);
+														 $self->emit('json',$hash);
 													 });
 								 })
 }

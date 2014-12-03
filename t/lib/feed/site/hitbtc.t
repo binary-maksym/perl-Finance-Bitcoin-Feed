@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 use Test::Exception;
 
 BEGIN {
@@ -11,17 +11,17 @@ BEGIN {
 my $obj = Finance::Bitcoin::Feed::Site::Hitbtc->new();
 can_ok($obj, 'go');
 isa_ok($obj->ua, 'Mojo::UserAgent');
-
+ok($obj->has_subscribers('json'),'has json subscribe');
 my $str = '';
 lives_ok(sub{
 					 $obj->on('output', sub{shift; $str = join " ", @_;});
-					 $obj->on_json({
+					 $obj->emit('json',{
 													MarketDataIncrementalRefresh => {
 																													 symbol => 'USDBTC',
 																													 trade => [{price => 1}]
 																													}
 													
 												 });
-					 },'set output emit and call on_json');
+					 },'set on output  and emit json');
 
 is($str, 'HITBTC USDBTC 1','emit result ok');
