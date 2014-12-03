@@ -3,15 +3,29 @@ use warnings;
 
 use Test::More;
 use Test::Exception;
+use Test::MockModule;
+use Test::MockObject::Extends;
+use Scalar::Util qw(isweak);
 
 BEGIN {
 	use_ok( 'Finance::Bitcoin::Feed::Site::BitStamp' );
 }
 
 my $obj = Finance::Bitcoin::Feed::Site::BitStamp->new();
-isa_ok($obj->socket, 'Finance::Bitcoin::Feed::BitStamp::Socket','class of socket is correct');
-is($obj->socket->{owner}, $obj, "object's socket's owner is object");
+
+my $socket = Finance::Bitcoin::Feed::BitStamp::Socket->new($obj);
+$socket = Test::MockObject::Extends->new($socket);
+$socket->set_true('go');
+$socket->fake_new('Finance::Bitcoin::Feed::BitStamp::Socket');
+lives_ok(sub{
+					 $obj->go;
+				 },'go!');
+ok($socket->called('go'), 'socket go is called');
+is($socket->{owner},$obj, "socket's owner is set ");
+ok(isweak($socket->{owner}), "socket's owner is weak");
+
 my $str = '';
+
 lives_ok(sub{$obj->on('output',sub {shift; $str = join " ", @_})}, 'set output event');
 
 lives_ok(sub{$obj->socket->trade({price => 1})},'call trade');

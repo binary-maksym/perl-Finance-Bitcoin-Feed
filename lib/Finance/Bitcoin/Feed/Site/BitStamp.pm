@@ -7,14 +7,14 @@ has 'socket';
 sub new{
 	my $class = shift;
 	my $self = $class->SUPER::new();
-
-  $self->socket(Finance::Bitcoin::Feed::BitStamp::Socket->new($self));
 	
 }	
 
 sub go{
-
-	shift->socket->go;
+	my $self = shift;
+	$self->SUPER::go;
+  $self->socket(Finance::Bitcoin::Feed::BitStamp::Socket->new($self));
+	$self->socket->go;
 }
 
 
@@ -37,7 +37,7 @@ sub new{
 sub trade {
     my $self = shift;
     my $data = shift;
-		$self->{owner}->emit('output', "BITSTAMP","BTCUSD", $data->{price});
+		$self->{owner}->emit('data_out', "BITSTAMP","BTCUSD", $data->{price});
 }
 
 sub go {
