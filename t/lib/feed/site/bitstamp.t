@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
+use Test::More;
 use Test::Exception;
 
 BEGIN {
@@ -17,3 +17,4 @@ lives_ok(sub{$obj->on('output',sub {shift; $str = join " ", @_})}, 'set output e
 lives_ok(sub{$obj->socket->trade({price => 1})},'call trade');
 is($str, 'BITSTAMP BTCUSD 1');
 
+done_testing();
