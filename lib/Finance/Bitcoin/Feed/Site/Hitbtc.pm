@@ -50,7 +50,7 @@ sub on_json{
 	if ($hash->{MarketDataIncrementalRefresh}
 			&& scalar @{$hash->{MarketDataIncrementalRefresh}{trade}}) {
 		for my $trade (@{$hash->{MarketDataIncrementalRefresh}{trade}}) {
-			$self->emit('output', 'HITBTC', $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
+			$self->emit('data_out', 'HITBTC', $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
 		}
 	}
 }

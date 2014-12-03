@@ -14,7 +14,7 @@ sub new{
 	my $class = shift;
 	my $self = $class->SUPER::new(@_);
 	$self->on('timeout', \&on_timeout);
-
+	$self->on('data_out', \&on_data_out);
 
 	my $timer = AnyEvent->timer (
       after => 0,    # first invoke ASAP
@@ -27,6 +27,12 @@ sub new{
 
 	
 	return $self;
+}
+
+sub on_data_out{
+	my $self = shift;
+	$self->last_activity_at(time());
+	$self->emit('output', @_);
 }
 
 sub timer_call_back{
