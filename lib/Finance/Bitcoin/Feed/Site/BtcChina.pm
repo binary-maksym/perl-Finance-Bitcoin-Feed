@@ -65,7 +65,8 @@ sub configure{
 
 	$self->on(trade => sub{
 							my ($self, $data) = @_;
-							say 'BTCCHINA ', uc($data->{market}), " ", $data->{price};
+							$self->owner->emit('data_out', 'BTCCHINA', uc($data->{market}), $data->{price});
+
 						});
 
 	$self->on('ping', sub{
@@ -87,7 +88,8 @@ sub configure{
 
 sub parse{
 	my ($self, $data) = @_;
-
+	use Data::Dumper;
+	$self->owner->debug(Dumper($data));
 	$self->owner->last_activity_at(time());
 	return unless $data =~ /^\d+/;
 	my ($code, $body) = $data =~ /^(\d+)(.*)$/;
