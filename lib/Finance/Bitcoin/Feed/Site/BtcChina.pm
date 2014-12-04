@@ -86,6 +86,7 @@ sub configure{
 	
 }
 
+#socket.io v2.
 sub parse{
 	my ($self, $data) = @_;
 	use Data::Dumper;
@@ -112,7 +113,7 @@ sub parse{
 	#disconnect ? reconnect!
 	elsif($code == 41){
 		#set timeout
-		$self->owner->last_activity_at(time - $self->owner->last_activity_period - 100);
+		$self->owner->set_timeout();
 	}
 	elsif($code == 42){
 		my $json_data = decode_json($body);

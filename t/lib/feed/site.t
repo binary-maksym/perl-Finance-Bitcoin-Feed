@@ -28,4 +28,9 @@ lives_ok(sub{
 				 },'prepare and call go again');
 ok($obj->last_activity_at != 0, 'on_data_out will update last_activity');
 ok($on_output_called, 'on_output be called');
+
+lives_ok(sub{
+					 $obj->set_timeout();
+				 },'set timeout');
+ok($obj->is_timeout(),'timeoute is set');
 done_testing();

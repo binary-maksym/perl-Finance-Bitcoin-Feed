@@ -43,7 +43,10 @@ sub timer_call_back{
 	}
 	
 }
-
+sub set_timeout{
+	my $self = shift;
+	$self->last_activity_at(time - $self->last_activity_period - 100);
+}
 sub is_timeout{
 	my $self = shift;
 	return time() - $self->last_activity_at > $self->last_activity_period;

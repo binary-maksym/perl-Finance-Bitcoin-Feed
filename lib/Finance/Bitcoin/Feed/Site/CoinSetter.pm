@@ -150,7 +150,7 @@ sub parse{
 		$tx->send({text => qq(2:::)});
 	}
 	elsif($packet->{type} eq 'disconnect'){
-		$tx->owner->last_activity_at(time() - $tx->owner->last_activity_period - 100);
+		$tx->owner->set_timeout();
 	}
 }
 
