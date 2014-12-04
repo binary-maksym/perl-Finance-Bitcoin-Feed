@@ -32,7 +32,7 @@ sub go{
 									 unless($tx->is_websocket){
 										 warn "WebSocket handshake failed!\n";
 										 # set timeout;
-										 $self->last_activity_at(time() - $self->last_activity_period - 100);
+										 $self->set_timeout;
 										 return;
 									 }
 
@@ -46,7 +46,6 @@ sub go{
 sub on_json{
 	my ($self, $hash) = @_;
 
-	$self->last_activity_at(time());
 	if ($hash->{MarketDataIncrementalRefresh}
 			&& scalar @{$hash->{MarketDataIncrementalRefresh}{trade}}) {
 		for my $trade (@{$hash->{MarketDataIncrementalRefresh}{trade}}) {

@@ -18,7 +18,7 @@ sub go{
 												 unless($tx->is_websocket){
 													 warn "Site BtcChina WebSocket handshake failed!\n";
 													 # set timeout;
-													 $self->last_activity_at(time() - $self->last_activity_period - 100);
+													 $self->set_timeout;
 													 return;
 												 }
 

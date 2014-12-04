@@ -71,5 +71,4 @@ lives_ok(sub{
 				 },'parse connect');
 
 is($str, 'COINSETTER BTCUSD 367');
-
 done_testing();
