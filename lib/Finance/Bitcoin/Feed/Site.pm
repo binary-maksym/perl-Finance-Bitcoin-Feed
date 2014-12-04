@@ -61,6 +61,14 @@ sub go {
 	$self->last_activity_at(time());
 }
 
+sub debug{
+	my $self = shift;
+	if($ENV{DEBUG}){
+		$ENV{MOJO_USERAGENT_DEBUG} = 1;
+		say STDERR "DEBUG-------------------------";
+		say STDERR @_;
+	}
+}
 
 
 1;
