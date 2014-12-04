@@ -6,6 +6,7 @@ use AnyEvent;
 use Finance::Bitcoin::Feed::Site::BitStamp;
 use Finance::Bitcoin::Feed::Site::Hitbtc;
 use Finance::Bitcoin::Feed::Site::BtcChina;
+use Finance::Bitcoin::Feed::Site::CoinSetter;
 
 sub new{
 	my $class = shift;
@@ -24,10 +25,14 @@ sub run{
 	#$hitbit->on('output',sub {shift, $self->emit('output',@_)});
 	#$hitbit->go();
 
-	my $btcchina = Finance::Bitcoin::Feed::Site::BtcChina->new();
-	$btcchina->on('output',sub {shift, $self->emit('output',@_)});
-	$btcchina->go();
-	
+	#my $btcchina = Finance::Bitcoin::Feed::Site::BtcChina->new();
+	#$btcchina->on('output',sub {shift, $self->emit('output',@_)});
+	#$btcchina->go();
+
+	my $coinsetter = Finance::Bitcoin::Feed::Site::CoinSetter->new();
+	$coinsetter->on('output',sub {shift, $self->emit('output',@_)});
+	$coinsetter->go();
+
 	AnyEvent->condvar->recv;
 }
 

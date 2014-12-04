@@ -86,6 +86,7 @@ sub configure{
 	
 }
 
+#socket.io v2.
 sub parse{
 	my ($self, $data) = @_;
 	use Data::Dumper;
