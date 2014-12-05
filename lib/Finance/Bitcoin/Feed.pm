@@ -19,22 +19,14 @@ sub new {
 
 sub run {
     my $self = shift;
-
-    my $bitstamp = Finance::Bitcoin::Feed::Site::BitStamp->new();
-    $bitstamp->on('output',sub {shift, $self->emit('output',@_)});
-    $bitstamp->go;
-
-    my $hitbit = Finance::Bitcoin::Feed::Site::Hitbtc->new();
-    $hitbit->on('output',sub {shift, $self->emit('output',@_)});
-    $hitbit->go();
-
-    my $btcchina = Finance::Bitcoin::Feed::Site::BtcChina->new();
-    $btcchina->on('output',sub {shift, $self->emit('output',@_)});
-    $btcchina->go();
-
-    my $coinsetter = Finance::Bitcoin::Feed::Site::CoinSetter->new();
-    $coinsetter->on( 'output', sub { shift, $self->emit( 'output', @_ ) } );
-    $coinsetter->go();
+		my @sites;
+		
+		for my $site_class (qw(Finance::Bitcoin::Feed::Site::BitStamp Finance::Bitcoin::Feed::Site::Hitbtc Finance::Bitcoin::Feed::Site::BtcChina Finance::Bitcoin::Feed::Site::CoinSetter)){
+			my $site = $site_class->new();
+			$site->on('output',sub {shift, $self->emit('output',@_)});
+			$site->go;
+			push @sites, $site;
+		}
 
     AnyEvent->condvar->recv;
 }
