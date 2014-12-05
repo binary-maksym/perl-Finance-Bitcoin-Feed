@@ -1,14 +1,12 @@
 package Finance::Bitcoin::Feed;
-use strict;
 
+use strict;
 use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
 use Finance::Bitcoin::Feed::Site::BitStamp;
 use Finance::Bitcoin::Feed::Site::Hitbtc;
 use Finance::Bitcoin::Feed::Site::BtcChina;
 use Finance::Bitcoin::Feed::Site::CoinSetter;
-
-our $|++;
 
 sub new {
     my $class = shift;
@@ -38,7 +36,6 @@ __END__
 =head1 NAME
 
 Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' streaming data source
-
 
 =head1 SYNOPSIS
 
