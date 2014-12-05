@@ -4,19 +4,18 @@ use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 
 has 'socket';
 
-sub new{
-	my $class = shift;
-	my $self = $class->SUPER::new();
-	
-}	
+sub new {
+    my $class = shift;
+    my $self  = $class->SUPER::new();
 
-sub go{
-	my $self = shift;
-	$self->SUPER::go;
-  $self->socket(Finance::Bitcoin::Feed::BitStamp::Socket->new($self));
-	$self->socket->go;
 }
 
+sub go {
+    my $self = shift;
+    $self->SUPER::go;
+    $self->socket( Finance::Bitcoin::Feed::BitStamp::Socket->new($self) );
+    $self->socket->go;
+}
 
 package Finance::Bitcoin::Feed::BitStamp::Socket;
 
@@ -25,19 +24,19 @@ use warnings;
 use parent qw(Finance::Bitcoin::Feed::Pusher);
 use Scalar::Util qw(weaken);
 
-sub new{
-	my $self = shift->SUPER::new(channels => [qw/live_trades/] );
-	$self->{owner} = shift;
+sub new {
+    my $self = shift->SUPER::new( channels => [qw/live_trades/] );
+    $self->{owner} = shift;
 
-	#weaken it to prevent from crossing reference
-	weaken($self->{owner});
-	return $self;
+    #weaken it to prevent from crossing reference
+    weaken( $self->{owner} );
+    return $self;
 }
 
 sub trade {
     my $self = shift;
     my $data = shift;
-		$self->{owner}->emit('data_out', "BITSTAMP","BTCUSD", $data->{price});
+    $self->{owner}->emit( 'data_out', "BITSTAMP", "BTCUSD", $data->{price} );
 }
 
 sub go {
@@ -45,8 +44,5 @@ sub go {
     $self->setup;
     $self->handle;
 }
-
-
-
 
 1;

@@ -8,36 +8,35 @@ use Finance::Bitcoin::Feed::Site::Hitbtc;
 use Finance::Bitcoin::Feed::Site::BtcChina;
 use Finance::Bitcoin::Feed::Site::CoinSetter;
 
-sub new{
-	my $class = shift;
-	my $self = $class->SUPER::new();
-	$self->on('output',sub{shift; say join " ", @_});
-	return $self;
-}
-sub run{
-	my $self = shift;
-	#my $bitstamp = Finance::Bitcoin::Feed::Site::BitStamp->new();
-	#$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
-	#$bitstamp->go;
-	#AnyEvent->condvar->recv;
-
-	#my $hitbit = Finance::Bitcoin::Feed::Site::Hitbtc->new();
-	#$hitbit->on('output',sub {shift, $self->emit('output',@_)});
-	#$hitbit->go();
-
-	#my $btcchina = Finance::Bitcoin::Feed::Site::BtcChina->new();
-	#$btcchina->on('output',sub {shift, $self->emit('output',@_)});
-	#$btcchina->go();
-
-	my $coinsetter = Finance::Bitcoin::Feed::Site::CoinSetter->new();
-	$coinsetter->on('output',sub {shift, $self->emit('output',@_)});
-	$coinsetter->go();
-
-	AnyEvent->condvar->recv;
+sub new {
+    my $class = shift;
+    my $self  = $class->SUPER::new();
+    $self->on( 'output', sub { shift; say join " ", @_ } );
+    return $self;
 }
 
+sub run {
+    my $self = shift;
 
+    #my $bitstamp = Finance::Bitcoin::Feed::Site::BitStamp->new();
+    #$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
+    #$bitstamp->go;
+    #AnyEvent->condvar->recv;
 
+    #my $hitbit = Finance::Bitcoin::Feed::Site::Hitbtc->new();
+    #$hitbit->on('output',sub {shift, $self->emit('output',@_)});
+    #$hitbit->go();
+
+    #my $btcchina = Finance::Bitcoin::Feed::Site::BtcChina->new();
+    #$btcchina->on('output',sub {shift, $self->emit('output',@_)});
+    #$btcchina->go();
+
+    my $coinsetter = Finance::Bitcoin::Feed::Site::CoinSetter->new();
+    $coinsetter->on( 'output', sub { shift, $self->emit( 'output', @_ ) } );
+    $coinsetter->go();
+
+    AnyEvent->condvar->recv;
+}
 
 1;
 

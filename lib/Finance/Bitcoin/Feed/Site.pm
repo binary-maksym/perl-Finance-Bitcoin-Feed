@@ -4,74 +4,73 @@ use strict;
 use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
 
-has 'cv' => sub {AnyEvent->condvar;};
-has last_activity_at => 0;
+has 'cv' => sub { AnyEvent->condvar; };
+has last_activity_at     => 0;
 has last_activity_period => 60;
 has 'timer';
 has started => 0;
 
-sub new{
-	my $class = shift;
-	my $self = $class->SUPER::new(@_);
-	$self->on('timeout', \&on_timeout);
-	$self->on('data_out', \&on_data_out);
+sub new {
+    my $class = shift;
+    my $self  = $class->SUPER::new(@_);
+    $self->on( 'timeout',  \&on_timeout );
+    $self->on( 'data_out', \&on_data_out );
 
-	my $timer = AnyEvent->timer (
-      after => 0,    # first invoke ASAP
-      interval => 1, # then invoke every second
-      cb    => sub { # the callback to invoke
-				$self->timer_call_back;
-      },
-															);
-	$self->timer($timer);
+    my $timer = AnyEvent->timer(
+        after    => 0,       # first invoke ASAP
+        interval => 1,       # then invoke every second
+        cb       => sub {    # the callback to invoke
+            $self->timer_call_back;
+        },
+    );
+    $self->timer($timer);
 
-	
-	return $self;
+    return $self;
 }
 
-sub on_data_out{
-	my $self = shift;
-	$self->last_activity_at(time());
-	$self->emit('output', @_);
+sub on_data_out {
+    my $self = shift;
+    $self->last_activity_at( time() );
+    $self->emit( 'output', @_ );
 }
 
-sub timer_call_back{
-	my $self = shift;
-	return unless $self->started;
-	if($self->is_timeout){
-		$self->emit('timeout');
-	}
-	
-}
-sub set_timeout{
-	my $self = shift;
-	$self->last_activity_at(time - $self->last_activity_period - 100);
-}
-sub is_timeout{
-	my $self = shift;
-	return time() - $self->last_activity_at > $self->last_activity_period;
+sub timer_call_back {
+    my $self = shift;
+    return unless $self->started;
+    if ( $self->is_timeout ) {
+        $self->emit('timeout');
+    }
+
 }
 
-sub on_timeout{
-	my $self = shift;
-	$self->go;
+sub set_timeout {
+    my $self = shift;
+    $self->last_activity_at( time - $self->last_activity_period - 100 );
 }
 
+sub is_timeout {
+    my $self = shift;
+    return time() - $self->last_activity_at > $self->last_activity_period;
+}
+
+sub on_timeout {
+    my $self = shift;
+    $self->go;
+}
 
 sub go {
-	my $self = shift;
-	$self->started(1);
-	$self->last_activity_at(time());
+    my $self = shift;
+    $self->started(1);
+    $self->last_activity_at( time() );
 }
 
-sub debug{
-	my $self = shift;
-	if($ENV{DEBUG}){
-		say STDERR "-------------------------";
-		say STDERR @_;
-	}
+sub debug {
+    my $self = shift;
+    if ( $ENV{DEBUG} ) {
+        say STDERR "-------------------------";
+        say STDERR @_;
+    }
 }
-
 
 1;
 
