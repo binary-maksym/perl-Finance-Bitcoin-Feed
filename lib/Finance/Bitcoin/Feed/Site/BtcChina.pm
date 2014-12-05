@@ -148,9 +148,9 @@ Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the
 
 =head1 SYNOPSIS
 
-    use Mojo::Base 'Finance::Bitcoin::Feed::Site::BitStamp';
+    use Mojo::Base 'Finance::Bitcoin::Feed::Site::BtcChina';
 
-    my $obj = Finance::Bitcoin::Feed::Site::BitStamp->new();
+    my $obj = Finance::Bitcoin::Feed::Site::BtcChina->new();
     $obj->go();
 
     # dont forget this
