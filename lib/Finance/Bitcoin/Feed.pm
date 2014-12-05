@@ -102,6 +102,14 @@ And these modules use L<Mojo::UserAgent>, you can also open the MOJO_USERAGENT_D
 
 L<Mojo::EventEmitter>
 
+L<Finance::Bitcoin::Feed::Site::BitStamp>
+
+L<Finance::Bitcoin::Feed::Site::Hitbtc>
+
+L<Finance::Bitcoin::Feed::Site::BtcChina>
+
+L<Finance::Bitcoin::Feed::Site::CoinSetter>
+
 =head1 AUTHOR
 
 Chylli  C<< <chylli@binary.com> >>
