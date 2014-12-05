@@ -47,7 +47,7 @@ __END__
 
 =head1 NAME
 
-Finance::Bitcoin::Feed::Site::BitStamp -- the class that connect and process the data from site bitstamp
+Finance::Bitcoin::Feed::Site::BitStamp -- the class that connect and fetch the bitcoin price data from site bitstamp
 
 
 =head1 SYNOPSIS
@@ -65,7 +65,7 @@ Finance::Bitcoin::Feed::Site::BitStamp -- the class that connect and process the
 
 =head1 DESCRIPTION
 
-Connect to site BitStamp by protocol Pusher.
+Connect to site BitStamp by protocol Pusher and fetch the bitcoin price data.
 
 =head1 EVENTS
 
@@ -79,7 +79,11 @@ It will be emit by its parent class when print out the data. You can listen on t
 
 =head1 SEE ALSO
 
-L<Finance::Bitcoin::Feed::Site>, L<Finance::BitStamp::Socket>, L<https://www.bitstamp.net/websocket/>
+L<Finance::Bitcoin::Feed::Site>
+
+L<Finance::BitStamp::Socket>
+
+L<bitstamp|https://www.bitstamp.net/websocket/>
 
 =head1 AUTHOR
 

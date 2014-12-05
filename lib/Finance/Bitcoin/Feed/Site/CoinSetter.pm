@@ -163,7 +163,7 @@ __END__
 
 =head1 NAME
 
-Finance::Bitcoin::Feed::Site::CoinSetter -- the class that connect and process the data from site Coinsetter
+Finance::Bitcoin::Feed::Site::CoinSetter -- the class that connect and fetch the bitcoin price data from site Coinsetter
 
 
 =head1 SYNOPSIS
@@ -181,7 +181,7 @@ Finance::Bitcoin::Feed::Site::CoinSetter -- the class that connect and process t
   
 =head1 DESCRIPTION
 
-Connect to site BitStamp by protocol socket.io v 0.9.6
+Connect to site BitStamp by protocol socket.io v 0.9.6 and fetch the bitcoin price data.
 
 =head1 EVENTS
 
@@ -198,8 +198,13 @@ It will subscribe channel from the source site. You can subscribe more channels 
 
 =head1 SEE ALSO
 
-L<Finance::Bitcoin::Feed::Site>, L<https://www.coinsetter.com/api>,
-L<https://github.com/Automattic/socket.io-parser>
+L<Finance::Bitcoin::Feed::Site>
+
+L<https://www.coinsetter.com/api>
+
+L<Mojo::UserAgent>
+
+L<socket.io-parser|https://github.com/Automattic/socket.io-parser>
 
 =head1 AUTHOR
 

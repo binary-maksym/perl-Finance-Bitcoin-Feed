@@ -144,7 +144,7 @@ __END__
 
 =head1 NAME
 
-Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the data from site btcchina
+Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and fetch the bitcoin price data from site btcchina
 
 =head1 SYNOPSIS
 
@@ -161,7 +161,7 @@ Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the
 
 =head1 DESCRIPTION
 
-Connect to site BitStamp by protocol websocket.io v2.2.2
+Connect to site BitStamp by protocol socket.io v2.2.2 and fetch the bitcoin price data.
 
 =head1 EVENTS
 
@@ -178,8 +178,13 @@ It will subscribe channel from the source site. You can subscribe more channels 
 
 =head1 SEE ALSO
 
-L<Finance::Bitcoin::Feed::Site>, L<Finance::BitStamp::Socket>, L<http://btcchina.org/websocket-api-market-data-documentation-en>,
-L<https://github.com/Automattic/socket.io-parser>
+L<Finance::Bitcoin::Feed::Site>
+
+L<btcchina api|http://btcchina.org/websocket-api-market-data-documentation-en>
+
+L<socket.io-parse|https://github.com/Automattic/socket.io-parser>
+
+L<Mojo::UserAgent>
 
 =head1 AUTHOR
 
