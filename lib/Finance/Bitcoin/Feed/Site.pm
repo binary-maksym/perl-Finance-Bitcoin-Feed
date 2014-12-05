@@ -45,6 +45,7 @@ sub timer_call_back {
 
 sub set_timeout {
     my $self = shift;
+		$self->debug('set timeout...');
     $self->last_activity_at( time - $self->last_activity_period - 100 );
 }
 
@@ -55,6 +56,8 @@ sub is_timeout {
 
 sub on_timeout {
     my $self = shift;
+
+		$self->debug('reconnecting...');
     $self->go;
 }
 
