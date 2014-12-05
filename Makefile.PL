@@ -11,7 +11,7 @@ use ExtUtils::MakeMaker ;
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Collect bitcoin real-time price from many sites' streaming data source",
-  "AUTHOR" => "Chylli <chylli\@binary.com>",
+  "AUTHOR" => "Chylli  C<< <chylli\@binary.com> >>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
   },
@@ -19,7 +19,17 @@ my %WriteMakefileArgs = (
   "EXE_FILES" => [],
   "LICENSE" => "perl",
   "NAME" => "Finance::Bitcoin::Feed",
-  "PREREQ_PM" => {},
+  "PREREQ_PM" => {
+    "AnyEvent" => 0,
+    "EV" => 0,
+    "JSON" => 0,
+    "Mojolicious" => 0,
+    "Protocol::WebSocket" => 0,
+    "Scalar::Util" => 0
+  },
+  "TEST_REQUIRES" => {
+    "Test::More" => "0.96"
+  },
   "VERSION" => "0.01",
   "test" => {
     "TESTS" => "t/*.t t/lib/*.t t/lib/feed/*.t t/lib/feed/site/*.t"
@@ -27,7 +37,15 @@ my %WriteMakefileArgs = (
 );
 
 
-my %FallbackPrereqs = ();
+my %FallbackPrereqs = (
+  "AnyEvent" => 0,
+  "EV" => 0,
+  "JSON" => 0,
+  "Mojolicious" => 0,
+  "Protocol::WebSocket" => 0,
+  "Scalar::Util" => 0,
+  "Test::More" => "0.96"
+);
 
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
