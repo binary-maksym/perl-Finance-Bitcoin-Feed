@@ -149,8 +149,11 @@ Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the
 =head1 SYNOPSIS
 
     use Mojo::Base 'Finance::Bitcoin::Feed::Site::BtcChina';
+    use AnyEvent;
 
     my $obj = Finance::Bitcoin::Feed::Site::BtcChina->new();
+    # listen on the event 'output' to get the data
+    $obj->on('output', sub { shift; say @_ });
     $obj->go();
 
     # dont forget this
@@ -159,6 +162,19 @@ Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the
 =head1 DESCRIPTION
 
 Connect to site BitStamp by protocol websocket.io v2.2.2
+
+=head1 Events
+
+This class inherits all events from L<Finance::Bitcoin::Feed::Site> and add some new ones.
+The most important event is 'output'.
+
+=head2 output
+
+It will be emit by its parent class when print out the data. You can listen on this event to get the output.
+
+=head2 subscribe
+
+It will subscribe channel from the source site. You can subscribe more channels in the method L</configure>
 
 =head1 SEE ALSO
 
