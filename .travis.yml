@@ -6,7 +6,7 @@ perl:
     - "5.12"
     - "5.10"
 before_install:
-    - "cpanm Mojolicious Protocol::WebSocket EV AnyEvent JSON Scalar::Util"
-    - "cpanm Devel::Cover::Report::Coveralls"
+    - "cpanm --installdeps ."
+    - "cpanm Test::MockObject Test::Perl::Critic Devel::Cover::Report::Coveralls"
 script:
   perl Makefile.PL && make test && cover -test -report coveralls
