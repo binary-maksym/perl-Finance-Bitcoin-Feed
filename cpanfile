@@ -1,4 +1,5 @@
 requires 'Mojolicious';
+requires 'EV'; # Mojo wants that
 requires 'AnyEvent';
 requires 'Protocol::WebSocket';
 requires 'JSON';
