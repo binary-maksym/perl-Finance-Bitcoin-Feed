@@ -71,43 +71,32 @@ L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real t
   ws://ws.pusherapp.com
   https://plug.coinsetter.com:3000
 
-=for author to fill in:
-    Write a full description of the module and its features here.
-    Use subsections (=head2, =head3) as appropriate.
+=head1 METHODS
+
+This class  inherits all methods from L<Mojo::EventEmitter>
+
+=head1 EVENTS
+
+This class  inherits all events from L<Mojo::EventEmitter> and add the following new ones:
+
+=head2 output
+
+   #output to the stdout, the default action:
+   $feed->on('output', sub { shift; say join " ", @_ } );
+
+   #or you can clear this default action and add yours:
+   $feed->unsubscribe('output');
+   open  my $fh, ">out.txt";
+   $feed->on('output', sub{shift; print $fh @_,"\n"});
 
 
-=head1 INTERFACE 
+=head1 DEBUGGING
 
-=for author to fill in:
-    Write a separate section listing the public components of the modules
-    interface. These normally consist of either subroutines that may be
-    exported, or methods that may be called on objects belonging to the
-    classes provided by the module.
+You can set the DEBUG environment variable to get some advanced diagnostics information printed to STDERR.
+And these modules use L<Mojo::UserAgent>, you can also open the MOJO_USERAGENT_DEBUG environment variable:
 
-
-=head1 DIAGNOSTICS
-
-=for author to fill in:
-    List every single error and warning message that the module can
-    generate (even the ones that will "never happen"), with a full
-    explanation of each problem, one or more likely causes, and any
-    suggested remedies.
-
-=over
-
-=back
-
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
-=for author to fill in:
-    A full explanation of any configuration system(s) used by the
-    module, including the names and locations of any configuration
-    files, and the meaning of any environment variables or properties
-    that can be set. These descriptions must also include details of any
-    configuration language used.
-  
-BitCoinFeed requires no configuration files or environment variables.
+   DEBUG=1
+   MOJO_USERAGENT_DEBUG=1
 
 
 =head1 DEPENDENCIES
@@ -121,33 +110,10 @@ BitCoinFeed requires no configuration files or environment variables.
 None.
 
 
-=head1 INCOMPATIBILITIES
-
-=for author to fill in:
-    A list of any modules that this module cannot be used in conjunction
-    with. This may be due to name conflicts in the interface, or
-    competition for system or program resources, or due to internal
-    limitations of Perl (for example, many modules that use source code
-    filters are mutually incompatible).
-
-None reported.
-
-
 =head1 BUGS AND LIMITATIONS
 
-=for author to fill in:
-    A list of known problems with the module, together with some
-    indication Whether they are likely to be fixed in an upcoming
-    release. Also a list of restrictions on the features the module
-    does provide: data types that cannot be handled, performance issues
-    and the circumstances in which they may arise, practical
-    limitations on the size of data sets, special cases that are not
-    (yet) handled, etc.
-
-No bugs have been reported.
-
 Please report any bugs or feature requests to
-C<bug-bitcoinfeed@rt.cpan.org>, or through the web interface at
+through the web interface at
 L<http://rt.cpan.org>.
 
 
