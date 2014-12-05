@@ -5,7 +5,7 @@ use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
 
 has last_activity_at     => 0;
-has last_activity_period => 60;
+has last_activity_period => 300;
 has 'timer';
 has started => 0;
 has site => '';
