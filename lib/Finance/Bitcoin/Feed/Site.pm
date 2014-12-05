@@ -9,6 +9,7 @@ has last_activity_at     => 0;
 has last_activity_period => 60;
 has 'timer';
 has started => 0;
+has site => '';
 
 sub new {
     my $class = shift;
@@ -59,7 +60,8 @@ sub on_timeout {
 }
 
 sub go {
-    my $self = shift;
+	my $self = shift;
+	$self->debug("starting ", $self->site);
     $self->started(1);
     $self->last_activity_at( time() );
 }
@@ -67,7 +69,7 @@ sub go {
 sub debug {
     my $self = shift;
     if ( $ENV{DEBUG} ) {
-        say STDERR "-------------------------";
+        say STDERR $self->site,"-------------------------";
         say STDERR @_;
     }
 }

@@ -3,7 +3,7 @@ use strict;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 
 has 'socket';
-
+has 'site' => 'bitstamp';
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new();

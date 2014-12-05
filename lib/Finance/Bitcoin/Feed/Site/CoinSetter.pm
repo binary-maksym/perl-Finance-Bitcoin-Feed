@@ -6,6 +6,7 @@ use Mojo::UserAgent;
 # Module implementation here
 has ws_url => 'https://plug.coinsetter.com:3000/socket.io/1';
 has 'ua';
+has 'site' => 'CoinSetter';
 
 sub go {
     my $self = shift;

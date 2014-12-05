@@ -5,6 +5,7 @@ use Mojo::UserAgent;
 
 has ws_url => 'wss://websocket.btcchina.com/socket.io/?transport=websocket';
 has 'ua';
+has 'site' => 'BtcChina';
 
 sub go {
     my $self = shift;

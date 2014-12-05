@@ -18,18 +18,17 @@ sub new {
 sub run {
     my $self = shift;
 
-    #my $bitstamp = Finance::Bitcoin::Feed::Site::BitStamp->new();
-    #$bitstamp->on('output',sub {shift, $self->emit('output',@_)});
-    #$bitstamp->go;
-    #AnyEvent->condvar->recv;
+    my $bitstamp = Finance::Bitcoin::Feed::Site::BitStamp->new();
+    $bitstamp->on('output',sub {shift, $self->emit('output',@_)});
+    $bitstamp->go;
 
-    #my $hitbit = Finance::Bitcoin::Feed::Site::Hitbtc->new();
-    #$hitbit->on('output',sub {shift, $self->emit('output',@_)});
-    #$hitbit->go();
+    my $hitbit = Finance::Bitcoin::Feed::Site::Hitbtc->new();
+    $hitbit->on('output',sub {shift, $self->emit('output',@_)});
+    $hitbit->go();
 
-    #my $btcchina = Finance::Bitcoin::Feed::Site::BtcChina->new();
-    #$btcchina->on('output',sub {shift, $self->emit('output',@_)});
-    #$btcchina->go();
+    my $btcchina = Finance::Bitcoin::Feed::Site::BtcChina->new();
+    $btcchina->on('output',sub {shift, $self->emit('output',@_)});
+    $btcchina->go();
 
     my $coinsetter = Finance::Bitcoin::Feed::Site::CoinSetter->new();
     $coinsetter->on( 'output', sub { shift, $self->emit( 'output', @_ ) } );

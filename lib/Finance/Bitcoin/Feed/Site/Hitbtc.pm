@@ -11,6 +11,7 @@ use AnyEvent;
 
 has ws_url => 'ws://api.hitbtc.com';
 has 'ua';
+has site => 'Hitbtc';
 
 sub new {
     my $class = shift;
