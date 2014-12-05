@@ -168,9 +168,12 @@ Finance::Bitcoin::Feed::Site::CoinSetter -- the class that connect and process t
 
 =head1 SYNOPSIS
 
-    use Mojo::Base 'Finance::Bitcoin::Feed::Site::CoinSetter';
+    use Finance::Bitcoin::Feed::Site::CoinSetter;
+    use AnyEvent;
 
     my $obj = Finance::Bitcoin::Feed::Site::BitStamp->new();
+    # listen on the event 'output' to get the adata
+    $obj->on('output', sub { shift; say @_ });
     $obj->go();
 
     # dont forget this 
@@ -179,6 +182,19 @@ Finance::Bitcoin::Feed::Site::CoinSetter -- the class that connect and process t
 =head1 DESCRIPTION
 
 Connect to site BitStamp by protocol socket.io v 0.9.6
+
+=head1 EVENTS
+
+This class inherits all events from L<Finance::Bitcoin::Feed::Site> and add some new ones.
+The most important event is 'output'.
+
+=head2 output
+
+It will be emit by its parent class when print out the data. You can listen on this event to get the output.
+
+=head2 subscribe
+
+It will subscribe channel from the source site. You can subscribe more channels in the method L</configure>
 
 =head1 SEE ALSO
 
