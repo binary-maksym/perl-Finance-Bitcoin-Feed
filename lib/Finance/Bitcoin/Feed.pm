@@ -20,7 +20,7 @@ sub new {
 sub run {
     my $self = shift;
 		my @sites;
-		
+
 		for my $site_class (qw(Finance::Bitcoin::Feed::Site::BitStamp Finance::Bitcoin::Feed::Site::Hitbtc Finance::Bitcoin::Feed::Site::BtcChina Finance::Bitcoin::Feed::Site::CoinSetter)){
 			my $site = $site_class->new();
 			$site->on('output',sub {shift, $self->emit('output',@_)});
@@ -56,18 +56,26 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
 =head1 DESCRIPTION
 
 L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real time data source from other sites:
-  ws://api.hitbtc.com:80
-  wss://websocket.btcchina.com
-  ws://ws.pusherapp.com
-  https://plug.coinsetter.com:3000
+
+=over 4
+
+=item * ws://api.hitbtc.com:80
+
+=item * wss://websocket.btcchina.com
+
+=item * ws://ws.pusherapp.com
+
+=item * https://plug.coinsetter.com:3000
+
+=back
 
 =head1 METHODS
 
-This class  inherits all methods from L<Mojo::EventEmitter>
+This class inherits all methods from L<Mojo::EventEmitter>
 
 =head1 EVENTS
 
-This class  inherits all events from L<Mojo::EventEmitter> and add the following new ones:
+This class inherits all events from L<Mojo::EventEmitter> and add the following new ones:
 
 =head2 output
 
