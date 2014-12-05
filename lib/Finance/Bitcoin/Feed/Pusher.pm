@@ -14,8 +14,6 @@ use JSON;
 use URI;
 use Data::Dumper;
 
-use constant VERBOSE => 0;
-use constant DEBUG   => 0;
 
 use constant CHANNELS => qw(
   order_book
@@ -40,6 +38,14 @@ use constant SSL_PORT   => 443;
 use constant SSL_SCHEME => 'wws';
 use constant SSL_TLS    => 'connect';
 use constant SSL_HOST   => 'wws.pusherapp.com';
+
+sub VERBOSE{
+	return $ENV{DEBUG} || 0;
+}
+
+sub DEBUG{
+	return $ENV{DEBUG} || 0;
+}
 
 # THESE two methods: trade() and order_book() are the main methods you will want to move and rewrite into your own module.
 # within these subroutines you will have access to the json response in a hash format.
