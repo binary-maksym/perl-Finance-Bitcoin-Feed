@@ -14,7 +14,7 @@ use JSON;
 use URI;
 use Data::Dumper;
 
-use constant VERBOSE => 1;
+use constant VERBOSE => 0;
 use constant DEBUG   => 0;
 
 use constant CHANNELS => qw(
