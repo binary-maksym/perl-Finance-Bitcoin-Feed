@@ -1,6 +1,5 @@
 requires 'Mojolicious';
 requires 'AnyEvent';
-requires 'EV';
 requires 'Protocol::WebSocket';
 requires 'JSON';
 requires 'Scalar::Util';

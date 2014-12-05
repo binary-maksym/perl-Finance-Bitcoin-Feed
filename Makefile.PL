@@ -21,14 +21,16 @@ my %WriteMakefileArgs = (
   "NAME" => "Finance::Bitcoin::Feed",
   "PREREQ_PM" => {
     "AnyEvent" => 0,
-    "EV" => 0,
     "JSON" => 0,
     "Mojolicious" => 0,
     "Protocol::WebSocket" => 0,
     "Scalar::Util" => 0
   },
   "TEST_REQUIRES" => {
-    "Test::More" => "0.96"
+    "Test::MockModule" => 0,
+    "Test::MockObject" => 0,
+    "Test::More" => "0.96",
+    "Test::Perl::Critic" => 0
   },
   "VERSION" => "0.01",
   "test" => {
@@ -39,12 +41,14 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "AnyEvent" => 0,
-  "EV" => 0,
   "JSON" => 0,
   "Mojolicious" => 0,
   "Protocol::WebSocket" => 0,
   "Scalar::Util" => 0,
-  "Test::More" => "0.96"
+  "Test::MockModule" => 0,
+  "Test::MockObject" => 0,
+  "Test::More" => "0.96",
+  "Test::Perl::Critic" => 0
 );
 
 
