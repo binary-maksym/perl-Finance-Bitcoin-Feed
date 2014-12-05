@@ -148,7 +148,7 @@ Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the
 
 =head1 SYNOPSIS
 
-    use Mojo::Base 'Finance::Bitcoin::Feed::Site::BtcChina';
+    use 'Finance::Bitcoin::Feed::Site::BtcChina';
     use AnyEvent;
 
     my $obj = Finance::Bitcoin::Feed::Site::BtcChina->new();
