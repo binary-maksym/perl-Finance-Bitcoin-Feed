@@ -1,9 +1,9 @@
 package Finance::Bitcoin::Feed::Pusher;
 
-use 5.014002;
 use strict;
 use warnings;
 our $VERSION = '0.01';
+use feature qw(say);
 
 use AnyEvent::Socket;
 use AnyEvent::Handle;
