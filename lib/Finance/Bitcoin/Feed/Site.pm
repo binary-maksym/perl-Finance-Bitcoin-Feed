@@ -74,6 +74,12 @@ sub debug {
     }
 }
 
+sub error{
+    my $self = shift;
+		say STDERR $self->site,"-------------------------";
+		say STDERR @_;
+}
+
 1;
 
 __END__

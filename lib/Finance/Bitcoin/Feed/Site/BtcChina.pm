@@ -18,7 +18,7 @@ sub go {
             my ( $ua, $tx ) = @_;
             $self->debug('connected!');
             unless ( $tx->is_websocket ) {
-                warn "Site BtcChina WebSocket handshake failed!\n";
+                $self->error("Site BtcChina WebSocket handshake failed!");
 
                 # set timeout;
                 $self->set_timeout;

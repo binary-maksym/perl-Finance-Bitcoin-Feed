@@ -25,11 +25,12 @@ sub go {
     my $self = shift;
     $self->SUPER::go(@_);
     $self->ua( Mojo::UserAgent->new );
+    $self->debug( 'connecting...', $self->ws_url );
     $self->ua->websocket(
         $self->ws_url => sub {
             my ( $ua, $tx ) = @_;
             unless ( $tx->is_websocket ) {
-                warn "WebSocket handshake failed!\n";
+                $self->error("WebSocket handshake failed!");
 
                 # set timeout;
                 $self->set_timeout;

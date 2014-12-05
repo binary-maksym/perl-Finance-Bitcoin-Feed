@@ -12,12 +12,11 @@ sub go {
     my $self = shift;
     $self->SUPER::go;
     $self->ua( Mojo::UserAgent->new() );
-
     $self->debug('get handshake information');
     my $tx = $self->ua->get( $self->ws_url );
     unless ( $tx->success ) {
         my $err = $tx->error;
-        warn "Connection error of Site CoinSetter: $err->{message}\n";
+        $self->error("Connection error of Site CoinSetter: $err->{message}");
         $self->set_timeout;
         return;
     }
@@ -29,12 +28,14 @@ sub go {
     my $url = $self->ws_url . "/websocket/$sid";
     $url =~ s/https/wss/;
 
+		$self->debug( 'connecting...', $url );
+		
     my $socket = $self->ua->websocket(
         $url => sub {
             my ( $ua, $tx ) = @_;
             $self->debug('connected!');
             unless ( $tx->is_websocket ) {
-                warn "Site BtcChina WebSocket handshake failed!\n";
+                $self->error("Site BtcChina WebSocket handshake failed!");
 
                 # set timeout;
                 $self->set_timeout;
