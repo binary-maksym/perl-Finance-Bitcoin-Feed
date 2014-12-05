@@ -75,6 +75,7 @@ sub configure {
     $self->emit( 'subscribe', 'marketdata_cnyltc' );
     $self->emit( 'subscribe', 'marketdata_btcltc' );
 
+		#receive trade vent
     $self->on(
         trade => sub {
             my ( $self, $data ) = @_;
@@ -90,6 +91,8 @@ sub configure {
             $self->send( { text => '2' } );
         }
     );
+
+		# ping ping!
     my $timer = AnyEvent->timer(
         after    => 10,
         interval => 1,
@@ -107,8 +110,6 @@ sub configure {
 #socket.io v2.
 sub parse {
     my ( $self, $data ) = @_;
-    use Data::Dumper;
-    $self->owner->debug( Dumper($data) );
     $self->owner->last_activity_at( time() );
     return unless $data =~ /^\d+/;
     my ( $code, $body ) = $data =~ /^(\d+)(.*)$/;
@@ -135,8 +136,8 @@ sub parse {
 
     #disconnect ? reconnect!
     elsif ( $code == 41 ) {
-
-        #set timeout
+			  $self->owner->debug('disconnected by server');
+			  #set timeout
         $self->owner->set_timeout();
     }
     elsif ( $code == 42 ) {
