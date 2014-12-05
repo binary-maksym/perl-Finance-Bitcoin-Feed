@@ -8,6 +8,8 @@ use Finance::Bitcoin::Feed::Site::Hitbtc;
 use Finance::Bitcoin::Feed::Site::BtcChina;
 use Finance::Bitcoin::Feed::Site::CoinSetter;
 
+our $|++;
+
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new();
