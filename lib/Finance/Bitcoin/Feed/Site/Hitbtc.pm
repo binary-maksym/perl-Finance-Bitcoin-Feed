@@ -1,13 +1,9 @@
-use strict;
-use warnings;
-
 package Finance::Bitcoin::Feed::Site::Hitbtc;
 
+use strict;
+use warnings;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
-
 use Mojo::UserAgent;
-use EV;
-use AnyEvent;
 
 has ws_url => 'ws://api.hitbtc.com';
 has 'ua';
@@ -65,12 +61,6 @@ __END__
 
 Finance::Bitcoin::Feed::Site - Base class of Finance::Bitcoin::Feed modules
 
-
-=head1 VERSION
-
-This document describes BitCoinFeed version 0.0.1
-
-
 =head1 SYNOPSIS
 
     use Mojo::Base 'Finance::Bitcoin::Feed::Site';
@@ -84,7 +74,7 @@ This document describes BitCoinFeed version 0.0.1
     Brief code example(s) here showing commonest usage(s).
     This section will be as far as many users bother reading
     so make it as educational and exeplary as possible.
-  
+
 =head1 DESCRIPTION
 
    It is a base class
@@ -94,7 +84,7 @@ This document describes BitCoinFeed version 0.0.1
     Use subsections (=head2, =head3) as appropriate.
 
 
-=head1 INTERFACE 
+=head1 INTERFACE
 
 =for author to fill in:
     Write a separate section listing the public components of the modules
@@ -134,7 +124,7 @@ This document describes BitCoinFeed version 0.0.1
     files, and the meaning of any environment variables or properties
     that can be set. These descriptions must also include details of any
     configuration language used.
-  
+
 BitCoinFeed requires no configuration files or environment variables.
 
 

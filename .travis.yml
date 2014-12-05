@@ -7,6 +7,6 @@ perl:
     - "5.10"
 before_install:
     - "cpanm --installdeps ."
-    - "cpanm Test::MockObject Test::Perl::Critic Devel::Cover::Report::Coveralls"
+    - "cpanm Devel::Cover::Report::Coveralls"
 script:
   perl Makefile.PL && make test && cover -test -report coveralls
