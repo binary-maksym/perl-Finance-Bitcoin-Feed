@@ -52,7 +52,7 @@ Finance::Bitcoin::Feed::Site::BitStamp -- the class that connect and process the
 
 =head1 SYNOPSIS
 
-    use 'Finance::Bitcoin::Feed::Site::BitStamp';
+    use Finance::Bitcoin::Feed::Site::BitStamp;
     use AnyEvent;
 
     my $obj = Finance::Bitcoin::Feed::Site::BitStamp->new();
