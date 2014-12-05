@@ -148,11 +148,11 @@ Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the
 
 =head1 SYNOPSIS
 
-    use 'Finance::Bitcoin::Feed::Site::BtcChina';
+    use Finance::Bitcoin::Feed::Site::BtcChina;
     use AnyEvent;
 
     my $obj = Finance::Bitcoin::Feed::Site::BtcChina->new();
-    # listen on the event 'output' to get the data
+    # listen on the event 'output' to get the adata
     $obj->on('output', sub { shift; say @_ });
     $obj->go();
 
@@ -163,7 +163,7 @@ Finance::Bitcoin::Feed::Site::BtcChina -- the class that connect and process the
 
 Connect to site BitStamp by protocol websocket.io v2.2.2
 
-=head1 Events
+=head1 EVENTS
 
 This class inherits all events from L<Finance::Bitcoin::Feed::Site> and add some new ones.
 The most important event is 'output'.
