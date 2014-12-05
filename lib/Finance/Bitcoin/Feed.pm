@@ -40,11 +40,6 @@ __END__
 Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' streaming data source
 
 
-=head1 VERSION
-
-This document describes BitCoinFeed version 0.0.1
-
-
 =head1 SYNOPSIS
 
     use Finance::Bitcoin::Feed;
@@ -58,11 +53,6 @@ This document describes BitCoinFeed version 0.0.1
     $feed->on('output', sub{shift; print $fh @_,"\n"});
 
 
-=for author to fill in:
-    Brief code example(s) here showing commonest usage(s).
-    This section will be as far as many users bother reading
-    so make it as educational and exeplary as possible.
-  
 =head1 DESCRIPTION
 
 L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real time data source from other sites:
@@ -99,23 +89,9 @@ And these modules use L<Mojo::UserAgent>, you can also open the MOJO_USERAGENT_D
    MOJO_USERAGENT_DEBUG=1
 
 
-=head1 DEPENDENCIES
+=head1 SEE ALSO
 
-=for author to fill in:
-    A list of all the other modules that this module relies upon,
-    including any restrictions on versions, and an indication whether
-    the module is part of the standard Perl distribution, part of the
-    module's distribution, or must be installed separately. ]
-
-None.
-
-
-=head1 BUGS AND LIMITATIONS
-
-Please report any bugs or feature requests to
-through the web interface at
-L<http://rt.cpan.org>.
-
+L<Mojo::EventEmitter>
 
 =head1 AUTHOR
 
