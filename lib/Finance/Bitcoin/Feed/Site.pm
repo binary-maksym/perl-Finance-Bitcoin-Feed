@@ -185,7 +185,9 @@ It will be emit when the timer watch that the connection is timeout
 
 =head1 SEE ALSO
 
-L<Mojo::EventEmitter>,L<Finance::Bitcoin::Feed>
+L<Mojo::EventEmitter>
+
+L<Finance::Bitcoin::Feed>
 
 =head1 AUTHOR
 
