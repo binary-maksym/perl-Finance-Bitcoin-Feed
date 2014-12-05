@@ -8,6 +8,8 @@ use Finance::Bitcoin::Feed::Site::Hitbtc;
 use Finance::Bitcoin::Feed::Site::BtcChina;
 use Finance::Bitcoin::Feed::Site::CoinSetter;
 
+our $VERSION = '0.01';
+
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new();
@@ -93,7 +95,6 @@ And these modules use L<Mojo::UserAgent>, you can also open the MOJO_USERAGENT_D
    DEBUG=1
    MOJO_USERAGENT_DEBUG=1
 
-
 =head1 SEE ALSO
 
 L<Mojo::EventEmitter>
@@ -102,3 +103,11 @@ L<Mojo::EventEmitter>
 
 Chylli  C<< <chylli@binary.com> >>
 
+=head1 COPYRIGHT
+
+Copyright 2014- Binary.com
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
