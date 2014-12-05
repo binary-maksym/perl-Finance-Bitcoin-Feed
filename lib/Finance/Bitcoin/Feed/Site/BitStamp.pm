@@ -53,8 +53,11 @@ Finance::Bitcoin::Feed::Site::BitStamp -- the class that connect and process the
 =head1 SYNOPSIS
 
     use 'Finance::Bitcoin::Feed::Site::BitStamp';
+    use AnyEvent;
 
     my $obj = Finance::Bitcoin::Feed::Site::BitStamp->new();
+    # listen on the event 'output' to get the adata
+    $obj->on('output', sub { shift; say @_ });
     $obj->go();
 
     # dont forget this 
@@ -63,6 +66,16 @@ Finance::Bitcoin::Feed::Site::BitStamp -- the class that connect and process the
 =head1 DESCRIPTION
 
 Connect to site BitStamp by protocol Pusher.
+
+=head1 EVENTS
+
+This class inherits all events from L<Finance::Bitcoin::Feed::Site>.
+The most important event is 'output'.
+
+=head2 output
+
+It will be emit by its parent class when print out the data. You can listen on this event to get the output.
+
 
 =head1 SEE ALSO
 
