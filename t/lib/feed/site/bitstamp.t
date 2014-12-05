@@ -23,20 +23,20 @@ lives_ok(
     },
     'go!'
 );
-ok( $socket->called('go'), 'socket go is called' );
-is( $socket->{owner}, $obj, "socket's owner is set " );
-ok( isweak( $socket->{owner} ), "socket's owner is weak" );
+ok($socket->called('go'), 'socket go is called');
+is($socket->{owner}, $obj, "socket's owner is set ");
+ok(isweak($socket->{owner}), "socket's owner is weak");
 
 my $str = '';
 
 lives_ok(
     sub {
-        $obj->on( 'output', sub { shift; $str = join " ", @_ } );
+        $obj->on('output', sub { shift; $str = join " ", @_ });
     },
     'set output event'
 );
 
-lives_ok( sub { $obj->socket->trade( { price => 1 } ) }, 'call trade' );
-is( $str, 'BITSTAMP BTCUSD 1' );
+lives_ok(sub { $obj->socket->trade({price => 1}) }, 'call trade');
+is($str, 'BITSTAMP BTCUSD 1');
 
 done_testing();

@@ -8,13 +8,13 @@ has last_activity_at     => 0;
 has last_activity_period => 300;
 has 'timer';
 has started => 0;
-has site => '';
+has site    => '';
 
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
-    $self->on( 'timeout',  \&on_timeout );
-    $self->on( 'data_out', \&on_data_out );
+    $self->on('timeout',  \&on_timeout);
+    $self->on('data_out', \&on_data_out);
 
     my $timer = AnyEvent->timer(
         after    => 0,       # first invoke ASAP
@@ -30,14 +30,14 @@ sub new {
 
 sub on_data_out {
     my $self = shift;
-    $self->last_activity_at( time() );
-    $self->emit( 'output', @_ );
+    $self->last_activity_at(time());
+    $self->emit('output', @_);
 }
 
 sub timer_call_back {
     my $self = shift;
     return unless $self->started;
-    if ( $self->is_timeout ) {
+    if ($self->is_timeout) {
         $self->emit('timeout');
     }
 
@@ -45,8 +45,8 @@ sub timer_call_back {
 
 sub set_timeout {
     my $self = shift;
-		$self->debug('set timeout...');
-    $self->last_activity_at( time - $self->last_activity_period - 100 );
+    $self->debug('set timeout...');
+    $self->last_activity_at(time - $self->last_activity_period - 100);
 }
 
 sub is_timeout {
@@ -57,29 +57,29 @@ sub is_timeout {
 sub on_timeout {
     my $self = shift;
 
-		$self->debug('reconnecting...');
+    $self->debug('reconnecting...');
     $self->go;
 }
 
 sub go {
-	my $self = shift;
-	$self->debug("starting ", $self->site);
+    my $self = shift;
+    $self->debug("starting ", $self->site);
     $self->started(1);
-    $self->last_activity_at( time() );
+    $self->last_activity_at(time());
 }
 
 sub debug {
     my $self = shift;
-    if ( $ENV{DEBUG} ) {
-        say STDERR $self->site,"-------------------------";
+    if ($ENV{DEBUG}) {
+        say STDERR $self->site, "-------------------------";
         say STDERR @_;
     }
 }
 
-sub error{
+sub error {
     my $self = shift;
-		say STDERR $self->site,"-------------------------";
-		say STDERR @_;
+    say STDERR $self->site, "-------------------------";
+    say STDERR @_;
 }
 
 1;
