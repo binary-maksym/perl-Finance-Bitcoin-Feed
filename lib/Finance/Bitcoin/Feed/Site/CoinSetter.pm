@@ -8,7 +8,7 @@ our $VERSION = '0.01';
 # Module implementation here
 has ws_url => 'https://plug.coinsetter.com:3000/socket.io/1';
 has 'ua';
-has 'site' => 'CoinSetter';
+has 'site' => 'COINSETTER';
 
 # this site need 2 handshakes
 # 1. get session id by http GET method
@@ -87,7 +87,7 @@ sub configure {
     $self->on(
         last => sub {
             my ($self, $data) = @_;
-            $self->owner->emit('data_out', 'COINSETTER', 'BTCUSD', $data->[0]{price});
+            $self->owner->emit('data_out', 'BTCUSD', $data->[0]{price});
         });
 }
 

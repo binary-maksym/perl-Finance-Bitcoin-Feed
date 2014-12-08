@@ -7,7 +7,7 @@ our $VERSION = '0.01';
 
 has ws_url => 'wss://websocket.btcchina.com/socket.io/?transport=websocket';
 has 'ua';
-has 'site' => 'BtcChina';
+has 'site' => 'BTCCHINA';
 
 sub go {
     my $self = shift;
@@ -77,7 +77,7 @@ sub configure {
     $self->on(
         trade => sub {
             my ($self, $data) = @_;
-            $self->owner->emit('data_out', 'BTCCHINA', uc($data->{market}), $data->{price});
+            $self->owner->emit('data_out', uc($data->{market}), $data->{price});
 
         });
 

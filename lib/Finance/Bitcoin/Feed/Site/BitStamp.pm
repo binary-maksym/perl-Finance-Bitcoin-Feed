@@ -5,7 +5,7 @@ use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 our $VERSION = '0.01';
 
 has 'socket';
-has 'site' => 'bitstamp';
+has 'site' => 'BITSTAMP';
 
 sub go {
     my $self = shift;
@@ -34,7 +34,7 @@ sub new {
 sub trade {
     my $self = shift;
     my $data = shift;
-    $self->{owner}->emit('data_out', "BITSTAMP", "BTCUSD", $data->{price});
+    $self->{owner}->emit('data_out', "BTCUSD", $data->{price});
 }
 
 sub go {

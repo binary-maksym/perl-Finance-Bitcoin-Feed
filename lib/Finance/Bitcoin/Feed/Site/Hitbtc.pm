@@ -9,7 +9,7 @@ our $VERSION = '0.01';
 
 has ws_url => 'ws://api.hitbtc.com';
 has 'ua';
-has site => 'Hitbtc';
+has site => 'HITBTC';
 
 sub new {
     my $class = shift;
@@ -50,7 +50,7 @@ sub on_json {
         && scalar @{$hash->{MarketDataIncrementalRefresh}{trade}})
     {
         for my $trade (@{$hash->{MarketDataIncrementalRefresh}{trade}}) {
-            $self->emit('data_out', 'HITBTC', $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
+            $self->emit('data_out', $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
         }
     }
 }

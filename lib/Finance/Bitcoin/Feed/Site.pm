@@ -33,7 +33,7 @@ sub new {
 sub on_data_out {
     my $self = shift;
     $self->last_activity_at(time());
-    $self->emit('output', @_);
+    $self->emit('output',$self->site, @_);
 }
 
 sub timer_call_back {
