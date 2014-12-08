@@ -56,6 +56,14 @@ And these modules use [Mojo::UserAgent](https://metacpan.org/pod/Mojo::UserAgent
 
 [Mojo::EventEmitter](https://metacpan.org/pod/Mojo::EventEmitter)
 
+[Finance::Bitcoin::Feed::Site::BitStamp](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::BitStamp)
+
+[Finance::Bitcoin::Feed::Site::Hitbtc](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::Hitbtc)
+
+[Finance::Bitcoin::Feed::Site::BtcChina](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::BtcChina)
+
+[Finance::Bitcoin::Feed::Site::CoinSetter](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::CoinSetter)
+
 # AUTHOR
 
 Chylli  `<chylli@binary.com>`

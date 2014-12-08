@@ -3,6 +3,8 @@ use strict;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 use Mojo::UserAgent;
 
+our $VERSION = '0.01';
+
 # Module implementation here
 has ws_url => 'https://plug.coinsetter.com:3000/socket.io/1';
 has 'ua';

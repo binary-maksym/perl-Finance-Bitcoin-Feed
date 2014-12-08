@@ -5,6 +5,8 @@ use warnings;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 use Mojo::UserAgent;
 
+our $VERSION = '0.01';
+
 has ws_url => 'ws://api.hitbtc.com';
 has 'ua';
 has site => 'Hitbtc';

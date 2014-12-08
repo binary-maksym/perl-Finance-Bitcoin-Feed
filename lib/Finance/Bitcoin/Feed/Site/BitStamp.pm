@@ -2,6 +2,8 @@ package Finance::Bitcoin::Feed::Site::BitStamp;
 use strict;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 
+our $VERSION = '0.01';
+
 has 'socket';
 has 'site' => 'bitstamp';
 
