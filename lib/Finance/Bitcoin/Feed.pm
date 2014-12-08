@@ -48,12 +48,23 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
 
     #default output is to print to the stdout
     Finance::Bitcoin::Feed->new->run();
+    # will print output to the stdout:
+    # BITSTAMP BTCUSD 123.00
+    
 
     #or custom your stdout
     my $feed = Finance::Bitcoin::Feed->new;
+    #first unsubscribe the event 'output'
+    $feed->unsubscribe('output');
+    #then listen on 'output' by your callback
     open  my $fh, ">out.txt";
-    $feed->on('output', sub{shift; print $fh @_,"\n"});
-
+    $fh->autoflush();
+    $feed->on('output', sub{
+       my ($self, $site, $currency, $price) = @_;
+       print $fh "the price currency $currency on site $site is $price\n";
+    });
+    # let's go!
+    $feed->run();
 
 =head1 DESCRIPTION
 
@@ -71,6 +82,16 @@ L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real t
 
 =back
 
+The default output format to the stdout by this format:
+
+   site_name CURRENCY price
+
+For example:
+
+   BITSTAMP BTCUSD 123.00
+
+You can custom your output by listen on the event L<output> and modify the data it received.
+
 =head1 METHODS
 
 This class inherits all methods from L<Mojo::EventEmitter>
@@ -87,7 +108,10 @@ This class inherits all events from L<Mojo::EventEmitter> and add the following 
    #or you can clear this default action and add yours:
    $feed->unsubscribe('output');
    open  my $fh, ">out.txt";
-   $feed->on('output', sub{shift; print $fh @_,"\n"});
+   $feed->on('output', sub{
+      my ($self, $site, $currency, $price) = @_;
+      say $fh "the price of $site of currency $currency is $price"
+   });
 
 
 =head1 DEBUGGING

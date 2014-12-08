@@ -101,7 +101,10 @@ Finance::Bitcoin::Feed::Site - Base class of Finance::Bitcoin::Feed::Site::* mod
        my $self = shift;
        #Dont' forget this line:
        $self->SUPER::go();
-       .....
+       # connect the site
+       # parse the data
+       # and emit the data by call
+       $self->emit('data_out', $self->site, $currency, $price);
     }
 
 =head1 DESCRIPTION
@@ -144,6 +147,10 @@ Create object and set some events and timer
 
 the callback which will be called when receive the event 'data_out'.
 It will Then emit the event 'output'
+
+The args of event data_out is:
+
+    my ($self, $site, $currency, $price) = @_;
 
 =head2 timer_call_back
 
