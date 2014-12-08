@@ -10,6 +10,7 @@ has last_activity_at     => 0;
 has last_activity_period => 300;
 has 'timer';
 has started => 0;
+#override this attribute by real site name
 has site    => '';
 
 sub new {
@@ -96,6 +97,8 @@ Finance::Bitcoin::Feed::Site - Base class of Finance::Bitcoin::Feed::Site::* mod
 =head1 SYNOPSIS
 
     use Mojo::Base 'Finance::Bitcoin::Feed::Site';
+    has site => 'SITENAME';
+
 
     sub go{
        my $self = shift;
@@ -104,7 +107,7 @@ Finance::Bitcoin::Feed::Site - Base class of Finance::Bitcoin::Feed::Site::* mod
        # connect the site
        # parse the data
        # and emit the data by call
-       $self->emit('data_out', $self->site, $currency, $price);
+       $self->emit('data_out', $currency, $price);
     }
 
 =head1 DESCRIPTION
