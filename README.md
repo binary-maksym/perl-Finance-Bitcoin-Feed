@@ -11,11 +11,23 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
 
     #default output is to print to the stdout
     Finance::Bitcoin::Feed->new->run();
+    # will print output to the stdout:
+    # BITSTAMP BTCUSD 123.00
+    
 
     #or custom your stdout
     my $feed = Finance::Bitcoin::Feed->new;
+    #first unsubscribe the event 'output'
+    $feed->unsubscribe('output');
+    #then listen on 'output' by your callback
     open  my $fh, ">out.txt";
-    $feed->on('output', sub{shift; print $fh @_,"\n"});
+    $fh->autoflush();
+    $feed->on('output', sub{
+       my ($self, $site, $currency, $price) = @_;
+       print $fh "the price currency $currency on site $site is $price\n";
+    });
+    # let's go!
+    $feed->run();
 
 # DESCRIPTION
 
@@ -25,6 +37,16 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
 - wss://websocket.btcchina.com
 - ws://ws.pusherapp.com
 - https://plug.coinsetter.com:3000
+
+The default output format to the stdout by this format:
+
+    site_name CURRENCY price
+
+For example:
+
+    BITSTAMP BTCUSD 123.00
+
+You can custom your output by listen on the event [output](https://metacpan.org/pod/output) and modify the data it received.
 
 # METHODS
 
@@ -42,7 +64,10 @@ This class inherits all events from [Mojo::EventEmitter](https://metacpan.org/po
     #or you can clear this default action and add yours:
     $feed->unsubscribe('output');
     open  my $fh, ">out.txt";
-    $feed->on('output', sub{shift; print $fh @_,"\n"});
+    $feed->on('output', sub{
+       my ($self, $site, $currency, $price) = @_;
+       say $fh "the price of $site of currency $currency is $price"
+    });
 
 # DEBUGGING
 
