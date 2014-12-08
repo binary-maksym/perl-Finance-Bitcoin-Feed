@@ -17,7 +17,7 @@ my %WriteMakefileArgs = (
   },
   "DISTNAME" => "Finance-Bitcoin-Feed",
   "EXE_FILES" => [],
-  "LICENSE" => "perl",
+  "LICENSE" => "apache",
   "NAME" => "Finance::Bitcoin::Feed",
   "PREREQ_PM" => {
     "AnyEvent" => 0,

@@ -46,10 +46,10 @@ This class inherits all events from [Mojo::EventEmitter](https://metacpan.org/po
 
 # DEBUGGING
 
-You can set the DEBUG environment variable to get some advanced diagnostics information printed to STDERR.
+You can set the FINANCE\_BITCOIN\_FEED\_DEBUG environment variable to get some advanced diagnostics information printed to STDERR.
 And these modules use [Mojo::UserAgent](https://metacpan.org/pod/Mojo::UserAgent), you can also open the MOJO\_USERAGENT\_DEBUG environment variable:
 
-    DEBUG=1
+    FINANCE_BITCOIN_FEED_DEBUG=1
     MOJO_USERAGENT_DEBUG=1
 
 # SEE ALSO
@@ -71,8 +71,3 @@ Chylli  `<chylli@binary.com>`
 # COPYRIGHT
 
 Copyright 2014- Binary.com
-
-# LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
