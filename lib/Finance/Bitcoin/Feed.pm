@@ -92,10 +92,10 @@ This class inherits all events from L<Mojo::EventEmitter> and add the following 
 
 =head1 DEBUGGING
 
-You can set the DEBUG environment variable to get some advanced diagnostics information printed to STDERR.
+You can set the FINANCE_BITCOIN_FEED_DEBUG environment variable to get some advanced diagnostics information printed to STDERR.
 And these modules use L<Mojo::UserAgent>, you can also open the MOJO_USERAGENT_DEBUG environment variable:
 
-   DEBUG=1
+   FINANCE_BITCOIN_FEED_DEBUG=1
    MOJO_USERAGENT_DEBUG=1
 
 =head1 SEE ALSO

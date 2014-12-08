@@ -72,7 +72,7 @@ sub go {
 
 sub debug {
     my $self = shift;
-    if ($ENV{DEBUG}) {
+    if ($ENV{FINANCE_BITCOIN_FEED_DEBUG}) {
         say STDERR $self->site, "-------------------------";
         say STDERR @_;
     }
@@ -163,7 +163,7 @@ Establish the connection.
 
 =head2 debug
 
-Print debug information if the envrionment variable 'DEBUG' is set to true.
+Print debug information if the envrionment variable 'FINANCE_BITCOIN_FEED_DEBUG' is set to true.
 
 =head2 error
 
