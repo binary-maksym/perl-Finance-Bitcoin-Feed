@@ -10,14 +10,15 @@ has last_activity_at     => 0;
 has last_activity_period => 300;
 has 'timer';
 has started => 0;
+
 #override this attribute by real site name
-has site    => '';
+has site => '';
 
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
-    $self->on('timeout',  \&on_timeout);
-    $self->on('data_out', \&on_data_out);
+    $self->on( 'timeout',  \&on_timeout );
+    $self->on( 'data_out', \&on_data_out );
 
     my $timer = AnyEvent->timer(
         after    => 0,       # first invoke ASAP
@@ -33,14 +34,14 @@ sub new {
 
 sub on_data_out {
     my $self = shift;
-    $self->last_activity_at(time());
-    $self->emit('output',$self->site, @_);
+    $self->last_activity_at( time() );
+    $self->emit( 'output', $self->site, @_ );
 }
 
 sub timer_call_back {
     my $self = shift;
     return unless $self->started;
-    if ($self->is_timeout) {
+    if ( $self->is_timeout ) {
         $self->emit('timeout');
     }
 
@@ -49,7 +50,7 @@ sub timer_call_back {
 sub set_timeout {
     my $self = shift;
     $self->debug('set timeout...');
-    $self->last_activity_at(time - $self->last_activity_period - 100);
+    $self->last_activity_at( time - $self->last_activity_period - 100 );
 }
 
 sub is_timeout {
@@ -66,14 +67,14 @@ sub on_timeout {
 
 sub go {
     my $self = shift;
-    $self->debug("starting ", $self->site);
+    $self->debug( "starting ", $self->site );
     $self->started(1);
-    $self->last_activity_at(time());
+    $self->last_activity_at( time() );
 }
 
 sub debug {
     my $self = shift;
-    if ($ENV{FINANCE_BITCOIN_FEED_DEBUG}) {
+    if ( $ENV{FINANCE_BITCOIN_FEED_DEBUG} ) {
         say STDERR $self->site, "-------------------------";
         say STDERR @_;
     }

@@ -14,7 +14,7 @@ has site => 'HITBTC';
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
-    $self->on('json', \&on_json);
+    $self->on( 'json', \&on_json );
 
     return $self;
 }
@@ -22,12 +22,12 @@ sub new {
 sub go {
     my $self = shift;
     $self->SUPER::go(@_);
-    $self->ua(Mojo::UserAgent->new);
-    $self->debug('connecting...', $self->ws_url);
+    $self->ua( Mojo::UserAgent->new );
+    $self->debug( 'connecting...', $self->ws_url );
     $self->ua->websocket(
         $self->ws_url => sub {
-            my ($ua, $tx) = @_;
-            unless ($tx->is_websocket) {
+            my ( $ua, $tx ) = @_;
+            unless ( $tx->is_websocket ) {
                 $self->error("WebSocket handshake failed!");
 
                 # set timeout;
@@ -37,20 +37,24 @@ sub go {
 
             $tx->on(
                 json => sub {
-                    my ($tx, $hash) = @_;
-                    $self->emit('json', $hash);
-                });
-        });
+                    my ( $tx, $hash ) = @_;
+                    $self->emit( 'json', $hash );
+                }
+            );
+        }
+    );
 }
 
 sub on_json {
-    my ($self, $hash) = @_;
+    my ( $self, $hash ) = @_;
 
-    if ($hash->{MarketDataIncrementalRefresh}
-        && scalar @{$hash->{MarketDataIncrementalRefresh}{trade}})
+    if ( $hash->{MarketDataIncrementalRefresh}
+        && scalar @{ $hash->{MarketDataIncrementalRefresh}{trade} } )
     {
-        for my $trade (@{$hash->{MarketDataIncrementalRefresh}{trade}}) {
-            $self->emit('data_out',$trade->{timestamp}, $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
+        for my $trade ( @{ $hash->{MarketDataIncrementalRefresh}{trade} } ) {
+            $self->emit( 'data_out', $trade->{timestamp},
+                $hash->{MarketDataIncrementalRefresh}{symbol},
+                $trade->{price} );
         }
     }
 }

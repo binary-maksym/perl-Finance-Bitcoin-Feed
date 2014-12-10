@@ -12,7 +12,7 @@ our $VERSION = '0.01';
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new();
-    $self->on('output', sub { shift; say join " ", @_ });
+    $self->on( 'output', sub { shift; say join " ", @_ } );
     return $self;
 }
 
@@ -22,10 +22,10 @@ sub run {
 
     for my $site_class (
         qw(Finance::Bitcoin::Feed::Site::Hitbtc Finance::Bitcoin::Feed::Site::BtcChina Finance::Bitcoin::Feed::Site::CoinSetter)
-        )
+      )
     {
         my $site = $site_class->new();
-        $site->on('output', sub { shift, $self->emit('output', @_) });
+        $site->on( 'output', sub { shift, $self->emit( 'output', @_ ) } );
         $site->go;
         push @sites, $site;
     }
