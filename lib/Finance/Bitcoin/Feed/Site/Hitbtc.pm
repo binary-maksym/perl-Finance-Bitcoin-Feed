@@ -50,7 +50,7 @@ sub on_json {
         && scalar @{$hash->{MarketDataIncrementalRefresh}{trade}})
     {
         for my $trade (@{$hash->{MarketDataIncrementalRefresh}{trade}}) {
-            $self->emit('data_out', $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
+            $self->emit('data_out',$trade->{timestamp}, $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
         }
     }
 }

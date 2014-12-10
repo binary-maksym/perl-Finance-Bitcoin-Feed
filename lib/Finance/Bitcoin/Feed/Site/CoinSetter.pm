@@ -87,7 +87,7 @@ sub configure {
     $self->on(
         last => sub {
             my ($self, $data) = @_;
-            $self->owner->emit('data_out', 'BTCUSD', $data->[0]{price});
+            $self->owner->emit('data_out', $data->[0]{'timeStamp'}, 'BTCUSD', $data->[0]{price});
         });
 }
 
