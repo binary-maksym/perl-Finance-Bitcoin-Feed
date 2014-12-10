@@ -154,7 +154,9 @@ It will Then emit the event 'output'
 
 The args of event data_out is:
 
-    my ($self, $site, $currency, $price) = @_;
+    my ($self, $timestamp, $site, $currency, $price) = @_;
+
+The unit of timestamp is ms.
 
 =head2 timer_call_back
 

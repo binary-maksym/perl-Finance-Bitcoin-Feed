@@ -81,11 +81,13 @@ L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real t
 
 The default output format to the stdout by this format:
 
-   site_name CURRENCY price
+   site_name TIMESTAMP CURRENCY price
 
 For example:
 
-   COINSETTER BTCUSD 123.00
+   COINSETTER 1418173081724 BTCUSD 123.00
+
+The unit of timestamp is ms.
 
 You can custom your output by listen on the event L<output> and modify the data it received.
 

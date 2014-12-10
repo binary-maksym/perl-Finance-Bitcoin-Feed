@@ -83,7 +83,7 @@ sub configure {
             my ( $self, $data ) = @_;
             $self->owner->emit(
                 'data_out',
-                $data->{date} * 1000,
+                $data->{date} * 1000, # the unit of timestamp is ms
                 uc( $data->{market} ),
                 $data->{price}
             );
