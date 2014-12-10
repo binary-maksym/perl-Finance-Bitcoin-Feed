@@ -77,7 +77,7 @@ sub configure {
     $self->on(
         trade => sub {
             my ($self, $data) = @_;
-            $self->owner->emit('data_out', $data->{date}, uc($data->{market}), $data->{price});
+            $self->owner->emit('data_out', $data->{date} * 1000, uc($data->{market}), $data->{price});
 
         });
 

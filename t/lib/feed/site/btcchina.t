@@ -90,6 +90,6 @@ lives_ok(
     'receive data'
 );
 
-is($str, 'BTCCHINA BTCCNY 2327.05', 'get correct result');
+is($str, 'BTCCHINA 1417673447000 BTCCNY 2327.05', 'get correct result');
 
 done_testing();
