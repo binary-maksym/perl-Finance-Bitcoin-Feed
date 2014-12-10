@@ -67,15 +67,15 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
 
 =head1 DESCRIPTION
 
-L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real time data source from other sites:
+L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real time data source from these sites:
 
 =over 4
 
-=item * ws://api.hitbtc.com:80
+=item * L<HitBtc|https://hitbtc.com/api#socketio>
 
-=item * wss://websocket.btcchina.com
+=item * L<BtcChina|http://btcchina.org/websocket-api-market-data-documentation-en>
 
-=item * https://plug.coinsetter.com:3000
+=item * L<CoinSetter|https://www.coinsetter.com/api/websockets/last>
 
 =back
 

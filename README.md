@@ -12,7 +12,7 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
     #default output is to print to the stdout
     Finance::Bitcoin::Feed->new->run();
     # will print output to the stdout:
-    # BITSTAMP BTCUSD 123.00
+    # COINSETTER BTCUSD 123.00
     
 
     #or custom your stdout
@@ -31,20 +31,21 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
 
 # DESCRIPTION
 
-[Finance::Bitcoin::Feed](https://metacpan.org/pod/Finance::Bitcoin::Feed) is a bitcoin realtime data source which collect real time data source from other sites:
+[Finance::Bitcoin::Feed](https://metacpan.org/pod/Finance::Bitcoin::Feed) is a bitcoin realtime data source which collect real time data source from these sites:
 
-- ws://api.hitbtc.com:80
-- wss://websocket.btcchina.com
-- ws://ws.pusherapp.com
-- https://plug.coinsetter.com:3000
+- [HitBtc](https://hitbtc.com/api#socketio)
+- [BtcChina](http://btcchina.org/websocket-api-market-data-documentation-en)
+- [CoinSetter](https://www.coinsetter.com/api/websockets/last)
 
 The default output format to the stdout by this format:
 
-    site_name CURRENCY price
+    site_name TIMESTAMP CURRENCY price
 
 For example:
 
-    BITSTAMP BTCUSD 123.00
+    COINSETTER 1418173081724 BTCUSD 123.00
+
+The unit of timestamp is ms.
 
 You can custom your output by listen on the event [output](https://metacpan.org/pod/output) and modify the data it received.
 
@@ -80,8 +81,6 @@ And these modules use [Mojo::UserAgent](https://metacpan.org/pod/Mojo::UserAgent
 # SEE ALSO
 
 [Mojo::EventEmitter](https://metacpan.org/pod/Mojo::EventEmitter)
-
-[Finance::Bitcoin::Feed::Site::BitStamp](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::BitStamp)
 
 [Finance::Bitcoin::Feed::Site::Hitbtc](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::Hitbtc)
 
