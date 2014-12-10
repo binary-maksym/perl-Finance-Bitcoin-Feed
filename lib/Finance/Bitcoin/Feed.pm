@@ -3,7 +3,6 @@ package Finance::Bitcoin::Feed;
 use strict;
 use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
-use Finance::Bitcoin::Feed::Site::BitStamp;
 use Finance::Bitcoin::Feed::Site::Hitbtc;
 use Finance::Bitcoin::Feed::Site::BtcChina;
 use Finance::Bitcoin::Feed::Site::CoinSetter;
@@ -22,7 +21,7 @@ sub run {
     my @sites;
 
     for my $site_class (
-        qw(Finance::Bitcoin::Feed::Site::BitStamp Finance::Bitcoin::Feed::Site::Hitbtc Finance::Bitcoin::Feed::Site::BtcChina Finance::Bitcoin::Feed::Site::CoinSetter)
+        qw(Finance::Bitcoin::Feed::Site::Hitbtc Finance::Bitcoin::Feed::Site::BtcChina Finance::Bitcoin::Feed::Site::CoinSetter)
         )
     {
         my $site = $site_class->new();
@@ -49,7 +48,7 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
     #default output is to print to the stdout
     Finance::Bitcoin::Feed->new->run();
     # will print output to the stdout:
-    # BITSTAMP BTCUSD 123.00
+    # COINSETTER BTCUSD 123.00
     
 
     #or custom your stdout
@@ -76,8 +75,6 @@ L<Finance::Bitcoin::Feed> is a bitcoin realtime data source which collect real t
 
 =item * wss://websocket.btcchina.com
 
-=item * ws://ws.pusherapp.com
-
 =item * https://plug.coinsetter.com:3000
 
 =back
@@ -88,7 +85,7 @@ The default output format to the stdout by this format:
 
 For example:
 
-   BITSTAMP BTCUSD 123.00
+   COINSETTER BTCUSD 123.00
 
 You can custom your output by listen on the event L<output> and modify the data it received.
 
@@ -125,8 +122,6 @@ And these modules use L<Mojo::UserAgent>, you can also open the MOJO_USERAGENT_D
 =head1 SEE ALSO
 
 L<Mojo::EventEmitter>
-
-L<Finance::Bitcoin::Feed::Site::BitStamp>
 
 L<Finance::Bitcoin::Feed::Site::Hitbtc>
 
