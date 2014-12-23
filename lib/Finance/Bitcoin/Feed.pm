@@ -9,7 +9,7 @@ use Carp;
 
 our $VERSION = '0.01';
 
-has 'sites' => sub {[qw(Hitbtc BtcChina CoinSetter BitCoin)]};
+has 'sites' => sub {[qw(Hitbtc BtcChina CoinSetter)]};
 
 sub new {
    	my $class = shift;

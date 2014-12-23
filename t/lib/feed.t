@@ -11,7 +11,7 @@ BEGIN {
 my $feed = Finance::Bitcoin::Feed->new();
 can_ok( $feed, 'run' );
 can_ok( $feed, 'sites');
-is_deeply( $feed->sites, [qw(Hitbtc BtcChina CoinSetter BitCoin)], 'default sites');
+is_deeply( $feed->sites, [qw(Hitbtc BtcChina CoinSetter)], 'default sites');
 isa_ok( $feed, 'Finance::Bitcoin::Feed' );
 isa_ok( $feed, 'Mojo::EventEmitter' );
 ok( $feed->has_subscribers('output') );
