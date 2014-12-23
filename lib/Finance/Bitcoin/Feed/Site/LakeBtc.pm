@@ -22,7 +22,7 @@ sub go {
             my ( $ua, $tx ) = @_;
             $self->debug('connected!');
             unless ( $tx->is_websocket ) {
-                $self->error("Site BtcChina WebSocket handshake failed!");
+                $self->error("Site " . $self->site . " WebSocket handshake failed!");
 
                 # set timeout;
                 $self->set_timeout;
@@ -52,8 +52,12 @@ sub configure {
     # call parse when receive text event
     $self->on(
         json => sub {
-            my ( $self, $message ) = @_;
-
+					my ( $self, $message ) = @_;
+					use Data::Dumper;
+					print Dumper($message);
+					$message = $message->[0];
+					my $command = shift @$message;
+						$self->emit($command, $message);
         }
     );
 
@@ -72,9 +76,31 @@ sub configure {
     );
     $self->emit( 'subscribe', 'ticker' );
 
+		########################################
+		# events from server
+		$self->on('client_connected', sub{
+								my $self = shift;
+								$self->emit('setup');
+							});
 
-		
 
+		$self->on('websocket_rails.ping',sub{
+								shift->send({json => ['websocket_rails.pong',undef,undef]})
+							});
+
+		$self->on('update',sub{
+								my ($self, $data) = @_;
+								$data = $data->[0]{data};
+								for my $k (sort keys %$data){
+									$self->owner->emit(
+																		 'data_out',
+																		 0,  # no timestamp
+																		 uc("${k}BTC"),
+																		 $data->{$k}{last},
+																		);
+								}
+								
+							})
 }
 
 
