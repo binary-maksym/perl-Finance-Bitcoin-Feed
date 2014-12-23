@@ -3,28 +3,31 @@ package Finance::Bitcoin::Feed;
 use strict;
 use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
-use Finance::Bitcoin::Feed::Site::Hitbtc;
-use Finance::Bitcoin::Feed::Site::BtcChina;
-use Finance::Bitcoin::Feed::Site::CoinSetter;
+use List::MoreUtils;
+use Module::Runtime qw(require_module);
+use Carp;
 
 our $VERSION = '0.01';
 
+has 'sites' => sub {[qw(Hitbtc BtcChina CoinSetter BitCoin)]};
+
 sub new {
-    my $class = shift;
-    my $self  = $class->SUPER::new();
+   	my $class = shift;
+  	my $self  = $class->SUPER::new(@_);
     $self->on( 'output', sub { shift; say join " ", @_ } );
     return $self;
 }
 
 sub run {
     my $self = shift;
-    my @sites;
 
-    for my $site_class (
-        qw(Finance::Bitcoin::Feed::Site::Hitbtc Finance::Bitcoin::Feed::Site::BtcChina Finance::Bitcoin::Feed::Site::CoinSetter)
-      )
-    {
-        my $site = $site_class->new();
+		my @sites;
+		
+    for my $site_class (@{$self->sites})
+			{
+				$site_class = 'Finance::Bitcoin::Feed::Site::' . $site_class;
+				eval {require_module($site_class)} || croak("No such module $site_class");
+				my $site = $site_class->new;
         $site->on( 'output', sub { shift, $self->emit( 'output', @_ ) } );
         $site->go;
         push @sites, $site;
