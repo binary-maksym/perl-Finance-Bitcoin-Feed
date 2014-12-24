@@ -5,7 +5,6 @@ use warnings;
 
 use Mojo::Base 'Mojo::EventEmitter';
 use AnyEvent;
-use List::MoreUtils;
 use Module::Runtime qw(require_module);
 use Carp;
 
