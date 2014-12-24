@@ -37,7 +37,8 @@ sub go {
 
 }
 
-package Mojo::Transaction::WebSocket::ForLakeBtc;    # hidden from PAUSE
+package
+	Mojo::Transaction::WebSocket::ForLakeBtc;    # hidden from PAUSE
 
 use JSON;
 use Mojo::Base 'Mojo::Transaction::WebSocket';

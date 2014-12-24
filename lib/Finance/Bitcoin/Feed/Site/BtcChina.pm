@@ -34,7 +34,8 @@ sub go {
 
 }
 
-package Mojo::Transaction::WebSocket::ForBtcChina;    # hidden from PAUSE
+package
+	Mojo::Transaction::WebSocket::ForBtcChina;    # hidden from PAUSE
 
 use JSON;
 use Mojo::Base 'Mojo::Transaction::WebSocket';

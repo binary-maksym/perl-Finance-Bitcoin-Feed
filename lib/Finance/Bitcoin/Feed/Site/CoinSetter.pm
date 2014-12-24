@@ -53,7 +53,8 @@ sub go {
     );
 }
 
-package Mojo::Transaction::WebSocket::ForCoinSetterSite;
+package
+	Mojo::Transaction::WebSocket::ForCoinSetterSite;
 use JSON;
 use Scalar::Util qw(weaken);
 
