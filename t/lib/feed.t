@@ -10,11 +10,12 @@ BEGIN {
 
 my $feed = Finance::Bitcoin::Feed->new();
 can_ok( $feed, 'run' );
-can_ok( $feed, 'sites');
-is_deeply( $feed->sites, [qw(Hitbtc BtcChina CoinSetter)], 'default sites');
+can_ok( $feed, 'sites' );
+is_deeply( $feed->sites, [qw(Hitbtc BtcChina CoinSetter)], 'default sites' );
 isa_ok( $feed, 'Finance::Bitcoin::Feed' );
 isa_ok( $feed, 'Mojo::EventEmitter' );
 ok( $feed->has_subscribers('output') );
-dies_ok(sub {Finance::Bitcoin::Feed->new(sites => 'hello')->run}, 'will die if site name error');
+dies_ok( sub { Finance::Bitcoin::Feed->new( sites => 'hello' )->run },
+    'will die if site name error' );
 
 done_testing();

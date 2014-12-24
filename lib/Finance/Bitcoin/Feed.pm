@@ -11,15 +11,17 @@ use Carp;
 
 use feature qw(say);
 
-
 our $VERSION = '0.01';
 our $|++;
 
-has 'sites' => sub {[qw(Hitbtc BtcChina CoinSetter LakeBtc)]};
-has 'output' => sub { sub{ shift; say join " ", @_ } };
+has 'sites' => sub { [qw(Hitbtc BtcChina CoinSetter LakeBtc)] };
+has 'output' => sub {
+    sub { shift; say join " ", @_ }
+};
+
 sub new {
-   	my $class = shift;
-  	my $self  = $class->SUPER::new(@_);
+    my $class = shift;
+    my $self  = $class->SUPER::new(@_);
     $self->on( 'output', $self->output );
     return $self;
 }
@@ -27,13 +29,13 @@ sub new {
 sub run {
     my $self = shift;
 
-		my @sites;
-		
-    for my $site_class (@{$self->sites})
-			{
-				$site_class = 'Finance::Bitcoin::Feed::Site::' . $site_class;
-				eval {require_module($site_class)} || croak("No such module $site_class");
-				my $site = $site_class->new;
+    my @sites;
+
+    for my $site_class ( @{ $self->sites } ) {
+        $site_class = 'Finance::Bitcoin::Feed::Site::' . $site_class;
+        eval { require_module($site_class) }
+          || croak("No such module $site_class");
+        my $site = $site_class->new;
         $site->on( 'output', sub { shift, $self->emit( 'output', @_ ) } );
         $site->go;
         push @sites, $site;
