@@ -149,7 +149,7 @@ This event has a default subscriber:
    #output to the stdout, the default action:
    $feed->on('output', sub { shift; say join " ", @_ } );
 
-you can customize the output by giving argument 'output' to the new methold
+You can customize the output by giving argument 'output' to the new method
 
     open  my $fh, ">out.txt";
     $fh->autoflush();
@@ -160,7 +160,7 @@ you can customize the output by giving argument 'output' to the new methold
     # let's go!
     $feed->run();
 
-or you can bind output directly to the feed to get multi outout or you should unscribe this event first.
+Or you can bind output directly to the feed to get multi outout or you should unscribe this event first.
 
     $feed->on('output', sub {....})
 
