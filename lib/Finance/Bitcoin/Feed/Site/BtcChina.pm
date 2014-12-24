@@ -3,7 +3,7 @@ use strict;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 use Mojo::UserAgent;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 has ws_url => 'wss://websocket.btcchina.com/socket.io/?transport=websocket';
 has 'ua';

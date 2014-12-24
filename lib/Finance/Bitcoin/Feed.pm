@@ -10,7 +10,7 @@ use Carp;
 
 use feature qw(say);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 has 'sites' => sub { [qw(Hitbtc BtcChina CoinSetter LakeBtc)] };
 has 'output' => sub {

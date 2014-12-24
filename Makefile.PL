@@ -34,7 +34,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.96",
     "Test::Perl::Critic" => 0
   },
-  "VERSION" => "0.01",
+  "VERSION" => "0.02",
   "test" => {
     "TESTS" => "t/*.t t/lib/*.t t/lib/feed/*.t t/lib/feed/site/*.t"
   }
