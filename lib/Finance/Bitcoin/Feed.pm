@@ -57,7 +57,7 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
     #default output is to print to the stdout
     Finance::Bitcoin::Feed->new->run();
     # will print output to the stdout:
-    # COINSETTER BTCUSD 123.00
+    # BITSTAMP BTCUSD 123.00
     
 
     #or custom your stdout
@@ -183,6 +183,8 @@ And these modules use L<Mojo::UserAgent>, you can also open the MOJO_USERAGENT_D
 =head1 SEE ALSO
 
 L<Mojo::EventEmitter>
+
+L<Finance::Bitcoin::Feed::Site::BitStamp>
 
 L<Finance::Bitcoin::Feed::Site::Hitbtc>
 
