@@ -115,11 +115,12 @@ This method have two arguments by which you can costumize the behavior of the fe
 
 =head3 sites
 
-which sites you want to connect. It is in fact the array reference of  module names of Finance::Bitcoin::Feed::Site::*. Now it have 4 modules:
+which sites you want to connect. It is in fact the array reference of  module names of Finance::Bitcoin::Feed::Site::*. Now there are the following sites:
 Hitbtc
 BtcChina
 CoinSetter
 LakeBtc
+BitStamp
 
 You can also put your own site module under this namespace and added here.
 
@@ -193,6 +194,8 @@ L<Finance::Bitcoin::Feed::Site::BtcChina>
 L<Finance::Bitcoin::Feed::Site::CoinSetter>
 
 L<Finance::Bitcoin::Feed::Site::LakeBtc>
+
+L<Finance::Bitcoin::Feed::Site::BitStamp>
 
 =head1 AUTHOR
 
