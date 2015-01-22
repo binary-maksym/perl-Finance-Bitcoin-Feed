@@ -20,7 +20,7 @@ has 'output' => sub {
 sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
-    $self->on( 'output', $self->output );
+    $self->on('output', $self->output);
     return $self;
 }
 
@@ -29,12 +29,12 @@ sub run {
 
     my @sites;
 
-    for my $site_class ( @{ $self->sites } ) {
+    for my $site_class (@{$self->sites}) {
         $site_class = 'Finance::Bitcoin::Feed::Site::' . $site_class;
         eval { require_module($site_class) }
-          || croak("No such module $site_class");
+            || croak("No such module $site_class");
         my $site = $site_class->new;
-        $site->on( 'output', sub { shift, $self->emit( 'output', @_ ) } );
+        $site->on('output', sub { shift, $self->emit('output', @_) });
         $site->go;
         push @sites, $site;
     }

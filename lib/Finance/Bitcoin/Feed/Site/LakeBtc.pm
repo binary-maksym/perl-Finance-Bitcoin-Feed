@@ -15,15 +15,14 @@ sub go {
     my $self = shift;
     $self->SUPER::go;
 
-    $self->ua( Mojo::UserAgent->new() );
-    $self->debug( 'connecting...', $self->ws_url );
+    $self->ua(Mojo::UserAgent->new());
+    $self->debug('connecting...', $self->ws_url);
     $self->ua->websocket(
         $self->ws_url => sub {
-            my ( $ua, $tx ) = @_;
+            my ($ua, $tx) = @_;
             $self->debug('connected!');
-            unless ( $tx->is_websocket ) {
-                $self->error(
-                    "Site " . $self->site . " WebSocket handshake failed!" );
+            unless ($tx->is_websocket) {
+                $self->error("Site " . $self->site . " WebSocket handshake failed!");
 
                 # set timeout;
                 $self->set_timeout;
@@ -32,13 +31,11 @@ sub go {
 
             bless $tx, 'Mojo::Transaction::WebSocket::ForLakeBtc';
             $tx->configure($self);
-        }
-    );
+        });
 
 }
 
-package
-	Mojo::Transaction::WebSocket::ForLakeBtc;    # hidden from PAUSE
+package Mojo::Transaction::WebSocket::ForLakeBtc;    # hidden from PAUSE
 
 use JSON;
 use Mojo::Base 'Mojo::Transaction::WebSocket';
@@ -49,39 +46,29 @@ sub configure {
     my $self  = shift;
     my $owner = shift;
     $self->owner($owner);
-    weaken( $self->{owner} );
+    weaken($self->{owner});
 
     # call parse when receive text event
     $self->on(
         json => sub {
-            my ( $self, $message ) = @_;
+            my ($self, $message) = @_;
             $message = $message->[0];
             my $command = shift @$message;
-            $self->emit( $command, $message );
-        }
-    );
+            $self->emit($command, $message);
+        });
 
     ################################################
     # setup events
     $self->on(
         subscribe => sub {
-            my ( $self, $channel ) = @_;
+            my ($self, $channel) = @_;
             $self->on(
                 'setup',
                 sub {
-                    $self->send(
-                        {
-                            json => [
-                                'websocket_rails.subscribe',
-                                { data => { channel => $channel } }
-                            ]
-                        }
-                    );
-                }
-            );
-        }
-    );
-    $self->emit( 'subscribe', 'ticker' );
+                    $self->send({json => ['websocket_rails.subscribe', {data => {channel => $channel}}]});
+                });
+        });
+    $self->emit('subscribe', 'ticker');
 
     ########################################
     # events from server
@@ -90,22 +77,20 @@ sub configure {
         sub {
             my $self = shift;
             $self->emit('setup');
-        }
-    );
+        });
 
     $self->on(
         'websocket_rails.ping',
         sub {
-            shift->send( { json => [ 'websocket_rails.pong', undef, undef ] } );
-        }
-    );
+            shift->send({json => ['websocket_rails.pong', undef, undef]});
+        });
 
     $self->on(
         'update',
         sub {
-            my ( $self, $data ) = @_;
+            my ($self, $data) = @_;
             $data = $data->[0]{data};
-            for my $k ( sort keys %$data ) {
+            for my $k (sort keys %$data) {
                 $self->owner->emit(
                     'data_out',
                     0,    # no timestamp
@@ -114,8 +99,7 @@ sub configure {
                 );
             }
 
-        }
-    );
+        });
 }
 
 1;
