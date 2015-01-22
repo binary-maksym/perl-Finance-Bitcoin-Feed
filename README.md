@@ -12,7 +12,7 @@ Finance::Bitcoin::Feed - Collect bitcoin real-time price from many sites' stream
     #default output is to print to the stdout
     Finance::Bitcoin::Feed->new->run();
     # will print output to the stdout:
-    # COINSETTER BTCUSD 123.00
+    # BITSTAMP BTCUSD 123.00
     
 
     #or custom your stdout
@@ -63,11 +63,12 @@ This method have two arguments by which you can costumize the behavior of the fe
 
 ### sites
 
-which sites you want to connect. It is in fact the array reference of  module names of Finance::Bitcoin::Feed::Site::\*. Now it have 4 modules:
+which sites you want to connect. It is in fact the array reference of  module names of Finance::Bitcoin::Feed::Site::\*. Now there are the following sites:
 Hitbtc
 BtcChina
 CoinSetter
 LakeBtc
+BitStamp
 
 You can also put your own site module under this namespace and added here.
 
@@ -130,6 +131,8 @@ And these modules use [Mojo::UserAgent](https://metacpan.org/pod/Mojo::UserAgent
 
 [Mojo::EventEmitter](https://metacpan.org/pod/Mojo::EventEmitter)
 
+[Finance::Bitcoin::Feed::Site::BitStamp](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::BitStamp)
+
 [Finance::Bitcoin::Feed::Site::Hitbtc](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::Hitbtc)
 
 [Finance::Bitcoin::Feed::Site::BtcChina](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::BtcChina)
@@ -137,6 +140,8 @@ And these modules use [Mojo::UserAgent](https://metacpan.org/pod/Mojo::UserAgent
 [Finance::Bitcoin::Feed::Site::CoinSetter](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::CoinSetter)
 
 [Finance::Bitcoin::Feed::Site::LakeBtc](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::LakeBtc)
+
+[Finance::Bitcoin::Feed::Site::BitStamp](https://metacpan.org/pod/Finance::Bitcoin::Feed::Site::BitStamp)
 
 # AUTHOR
 
