@@ -37,6 +37,6 @@ lives_ok(
 );
 
 lives_ok(sub { $obj->socket->trade({price => 1}) }, 'call trade');
-is($str, 'BITSTAMP BTCUSD 1');
+is($str, 'BITSTAMP 0 BTCUSD 1');
 
 done_testing();

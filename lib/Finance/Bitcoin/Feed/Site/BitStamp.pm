@@ -34,7 +34,7 @@ sub new {
 sub trade {
     my $self = shift;
     my $data = shift;
-    $self->{owner}->emit('data_out', "BTCUSD", $data->{price});
+    $self->{owner}->emit('data_out',0, "BTCUSD", $data->{price});
 }
 
 sub go {

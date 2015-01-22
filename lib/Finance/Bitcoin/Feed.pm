@@ -12,7 +12,7 @@ use feature qw(say);
 
 our $VERSION = '0.02';
 
-has 'sites' => sub { [qw(Hitbtc BtcChina CoinSetter LakeBtc)] };
+has 'sites' => sub { [qw(Hitbtc BtcChina CoinSetter LakeBtc BitStamp)] };
 has 'output' => sub {
     sub { shift; say join " ", @_ }
 };
