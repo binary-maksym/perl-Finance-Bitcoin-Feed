@@ -6,7 +6,7 @@ use Finance::Bitcoin::Feed::Site::LakeBtc::Socket;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 use Mojo::UserAgent;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 has ws_url => 'wss://www.LakeBTC.com/websocket';
 has 'ua';
