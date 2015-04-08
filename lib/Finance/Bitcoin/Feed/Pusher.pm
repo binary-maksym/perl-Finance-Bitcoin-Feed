@@ -53,6 +53,7 @@ sub trade {
     my $data = shift;
     warn Data::Dumper->Dump([$data]);
     warn "*** I am the default trade()... you should overwride this method in your own package\n";
+    return;
 }
 
 sub order_book {
@@ -60,6 +61,7 @@ sub order_book {
     my $data = shift;
     warn Data::Dumper->Dump([$data]);
     warn "** I am the default order_book()... you should overwride this method in your own package\n";
+    return;
 }
 
 # end the methods you should definately override.
@@ -70,11 +72,10 @@ sub order_book {
 #
 # You should look at "test.pl" to see a basic example.
 
-sub new { (bless {} => shift)->init(@_) }
+sub new { return (bless {} => shift)->init(@_) }
 
 sub init {
-    my $self = shift;
-    my %args = @_;
+    my ($self, %args) = @_;
     foreach my $attribute ($self->attributes) {
         $self->$attribute($args{$attribute}) if exists $args{$attribute};
     }
