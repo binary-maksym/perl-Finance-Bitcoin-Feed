@@ -95,7 +95,7 @@ sub go {
     my $self = shift;
     $self->setup;
     $self->handle;
-    $self->wait;
+    $self->just_wait;
     return;
 }
 
@@ -239,7 +239,7 @@ sub on_eof {
 }
 
 sub attributes { return ATTRIBUTES }
-sub wait       { return AnyEvent->condvar->wait }
+sub just_wait  { return AnyEvent->condvar->wait }
 sub json       { return shift->{json} ||= JSON->new }
 sub host       { return shift->ssl ? SSL_HOST : HOST }
 sub port       { return shift->ssl ? SSL_PORT : PORT }
