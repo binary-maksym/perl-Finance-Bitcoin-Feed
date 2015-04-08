@@ -41,6 +41,7 @@ sub go {
                     $self->emit('json', $hash);
                 });
         });
+    return;
 }
 
 sub on_json {
@@ -53,6 +54,7 @@ sub on_json {
             $self->emit('data_out', $trade->{timestamp}, $hash->{MarketDataIncrementalRefresh}{symbol}, $trade->{price});
         }
     }
+    return;
 }
 
 1;

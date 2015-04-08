@@ -32,7 +32,7 @@ sub go {
             bless $tx, 'Mojo::Transaction::WebSocket::ForLakeBtc';
             $tx->configure($self);
         });
-
+    return;
 }
 
 package Mojo::Transaction::WebSocket::ForLakeBtc;    # hidden from PAUSE
@@ -100,6 +100,7 @@ sub configure {
             }
 
         });
+    return;
 }
 
 1;
