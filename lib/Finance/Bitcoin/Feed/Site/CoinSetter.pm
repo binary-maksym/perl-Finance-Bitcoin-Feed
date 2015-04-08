@@ -49,6 +49,7 @@ sub go {
             bless $tx, 'Mojo::Transaction::WebSocket::ForCoinSetterSite';
             $tx->configure($self);
         });
+    return;
 }
 
 package Mojo::Transaction::WebSocket::ForCoinSetterSite;
@@ -89,6 +90,7 @@ sub configure {
             my ($self, $data) = @_;
             $self->owner->emit('data_out', $data->[0]{'timeStamp'}, 'BTCUSD', $data->[0]{price});
         });
+    return;
 }
 
 #socketio v0.9.6
@@ -157,6 +159,7 @@ sub parse {
         $tx->owner->debug('disconnected by server');
         $tx->owner->set_timeout();
     }
+    return;
 }
 
 1;
