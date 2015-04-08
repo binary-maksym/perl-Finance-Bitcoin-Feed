@@ -33,9 +33,10 @@ sub new {
 }
 
 sub on_data_out {
-    my $self = shift;
+    my ($self, @content) = @_;
     $self->last_activity_at(time());
-    $self->emit('output', $self->site, @_);
+    $self->emit('output', $self->site, @content);
+    return;
 }
 
 sub timer_call_back {
@@ -44,13 +45,14 @@ sub timer_call_back {
     if ($self->is_timeout) {
         $self->emit('timeout');
     }
-
+    return;
 }
 
 sub set_timeout {
     my $self = shift;
     $self->debug('set timeout...');
     $self->last_activity_at(time - $self->last_activity_period - 100);
+    return;
 }
 
 sub is_timeout {
@@ -62,7 +64,7 @@ sub on_timeout {
     my $self = shift;
 
     $self->debug('reconnecting...');
-    $self->go;
+    return $self->go;
 }
 
 sub go {
@@ -70,6 +72,7 @@ sub go {
     $self->debug("starting ", $self->site);
     $self->started(1);
     $self->last_activity_at(time());
+    return;
 }
 
 sub debug {
@@ -78,12 +81,14 @@ sub debug {
         say STDERR $self->site, "-------------------------";
         say STDERR @_;
     }
+    return;
 }
 
 sub error {
-    my $self = shift;
+    my ($self, @content) = @_;
     say STDERR $self->site, "-------------------------";
-    say STDERR @_;
+    say STDERR @content;
+    return;
 }
 
 1;
