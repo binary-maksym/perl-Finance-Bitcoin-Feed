@@ -34,12 +34,13 @@ sub run {
         eval { require_module($site_class) }
             || croak("No such module $site_class");
         my $site = $site_class->new;
-        $site->on('output', sub { shift, $self->emit('output', @_) });
+        $site->on('output', sub { shift; $self->emit('output', @_) });
         $site->go;
         push @sites, $site;
     }
 
     AnyEvent->condvar->recv;
+    return;
 }
 
 1;
