@@ -9,11 +9,12 @@ use Scalar::Util qw(isweak);
 
 BEGIN {
     use_ok('Finance::Bitcoin::Feed::Site::BitStamp');
+		use_ok('Finance::Bitcoin::Feed::Site::BitStamp::Socket');
 }
 
 my $obj = Finance::Bitcoin::Feed::Site::BitStamp->new();
 
-my $socket = Finance::Bitcoin::Feed::BitStamp::Socket->new($obj);
+my $socket = Finance::Bitcoin::Feed::Site::BitStamp::Socket->new($obj);
 $socket = Test::MockObject::Extends->new($socket);
 $socket->set_true('go');
 $socket->fake_new('Finance::Bitcoin::Feed::BitStamp::Socket');
