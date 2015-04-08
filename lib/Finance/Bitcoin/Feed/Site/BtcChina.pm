@@ -30,7 +30,7 @@ sub go {
             bless $tx, 'Mojo::Transaction::WebSocket::ForBtcChina';
             $tx->configure($self);
         });
-
+		return;
 }
 
 package Mojo::Transaction::WebSocket::ForBtcChina;    # hidden from PAUSE
@@ -102,7 +102,7 @@ sub configure {
             }
         });
     $self->timer($timer);
-
+		return;
 }
 
 #socket.io v2.2.2
@@ -142,7 +142,7 @@ sub parse {
         my $json_data = decode_json($body);
         $self->emit($json_data->[0], $json_data->[1]);
     }
-
+		return;
 }
 
 1;
