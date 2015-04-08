@@ -88,6 +88,7 @@ sub setup {
     $self->protocol(PROTOCOL)   unless $self->protocol;
     $self->app_key(APP_KEY)     unless $self->app_key;
     $self->ssl(SSL)             unless $self->ssl;
+    return;
 }
 
 sub go {
@@ -95,6 +96,7 @@ sub go {
     $self->setup;
     $self->handle;
     $self->wait;
+    return;
 }
 
 sub handle {
@@ -113,6 +115,7 @@ sub handle {
         on_error    => $self->on_error,
         on_eof      => $self->on_eof,
     );
+    return;
 }
 
 sub on_read {
@@ -235,28 +238,28 @@ sub on_eof {
         }
 }
 
-sub attributes { ATTRIBUTES }
-sub wait       { AnyEvent->condvar->wait }
-sub json       { shift->{json} ||= JSON->new }
-sub host       { shift->ssl ? SSL_HOST : HOST }
-sub port       { shift->ssl ? SSL_PORT : PORT }
-sub tls        { shift->ssl ? SSL_TLS : TLS }
-sub scheme     { shift->ssl ? SSL_SCHEME : SCHEME }
-sub client     { my $self = shift; $self->get_set(@_) }
-sub frame      { my $self = shift; $self->get_set(@_) }
-sub channels   { my $self = shift; $self->get_set(@_) }
-sub protocol   { my $self = shift; $self->get_set(@_) }
-sub app_key    { my $self = shift; $self->get_set(@_) }
-sub ssl        { my $self = shift; $self->get_set(@_) }
+sub attributes { return ATTRIBUTES }
+sub wait       { return AnyEvent->condvar->wait }
+sub json       { return shift->{json} ||= JSON->new }
+sub host       { return shift->ssl ? SSL_HOST : HOST }
+sub port       { return shift->ssl ? SSL_PORT : PORT }
+sub tls        { return shift->ssl ? SSL_TLS : TLS }
+sub scheme     { return shift->ssl ? SSL_SCHEME : SCHEME }
+sub client     { my $self = shift; return $self->get_set(@_) }
+sub frame      { my $self = shift; return $self->get_set(@_) }
+sub channels   { my $self = shift; return $self->get_set(@_) }
+sub protocol   { my $self = shift; return $self->get_set(@_) }
+sub app_key    { my $self = shift; return $self->get_set(@_) }
+sub ssl        { my $self = shift; return $self->get_set(@_) }
 
 sub now {
-    sprintf '%4d-%02d-%02d %02d:%02d:%02d', (localtime(time))[5] + 1900, (localtime(time))[4, 3, 2, 1, 0];
+    return sprintf '%4d-%02d-%02d %02d:%02d:%02d', (localtime(time))[5] + 1900, (localtime(time))[4, 3, 2, 1, 0];
 }
 
 sub get_set {
-    my $self      = shift;
+    my ($self, $v) = @_;
     my $attribute = ((caller(1))[3] =~ /::(\w+)$/)[0];
-    $self->{$attribute} = shift if scalar @_;
+    $self->{$attribute} = $v if $v;
     return $self->{$attribute};
 }
 
