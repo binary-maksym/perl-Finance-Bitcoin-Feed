@@ -8,6 +8,7 @@ use Scalar::Util qw(isweak);
 
 BEGIN {
     use_ok('Finance::Bitcoin::Feed::Site::CoinSetter');
+		use_ok('Finance::Bitcoin::Feed::Site::CoinSetter::Socket');
 }
 
 my $obj = Finance::Bitcoin::Feed::Site::CoinSetter->new();
@@ -35,7 +36,7 @@ $res1->mock(
 );
 $tx1->mock( 'res', sub { $res1 } );
 
-my $socket = Mojo::Transaction::WebSocket::ForCoinSetterSite->new();
+my $socket = Finance::Bitcoin::Feed::Site::CoinSetter::Socket->new();
 $socket = Test::MockObject::Extends->new($socket);
 $socket->set_false('is_websocket');
 
