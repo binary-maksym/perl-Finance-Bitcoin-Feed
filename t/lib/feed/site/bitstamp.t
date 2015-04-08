@@ -17,7 +17,7 @@ my $obj = Finance::Bitcoin::Feed::Site::BitStamp->new();
 my $socket = Finance::Bitcoin::Feed::Site::BitStamp::Socket->new($obj);
 $socket = Test::MockObject::Extends->new($socket);
 $socket->set_true('go');
-$socket->fake_new('Finance::Bitcoin::Feed::BitStamp::Socket');
+$socket->fake_new('Finance::Bitcoin::Feed::Site::BitStamp::Socket');
 lives_ok(
     sub {
         $obj->go;
