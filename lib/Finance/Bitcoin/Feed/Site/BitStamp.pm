@@ -12,7 +12,7 @@ sub go {
     my $self = shift;
     $self->SUPER::go;
     $self->debug('connecting...');
-    $self->socket(Finance::Bitcoin::Feed::BitStamp::Socket->new($self));
+    $self->socket(Finance::Bitcoin::Feed::Site::BitStamp::Socket->new($self));
     return $self->socket->go;
 }
 
