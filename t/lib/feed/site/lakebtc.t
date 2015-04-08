@@ -8,13 +8,14 @@ use Scalar::Util qw(isweak);
 
 BEGIN {
     use_ok('Finance::Bitcoin::Feed::Site::LakeBtc');
+		use_ok('Finance::Bitcoin::Feed::Site::LakeBtc::Socket');
 }
 
 my $obj = Finance::Bitcoin::Feed::Site::LakeBtc->new();
 
 #testing connect fail...
 
-my $socket = Mojo::Transaction::WebSocket::ForLakeBtc->new();
+my $socket = Finance::Bitcoin::Feed::Site::LakeBtc::Socket->new();
 $socket = Test::MockObject::Extends->new($socket);
 $socket->set_false('is_websocket');
 my $ua_mock = Test::MockObject->new();
