@@ -1,6 +1,8 @@
 Revision history for Finance-Bitcoin-Feed
 
 {{$NEXT}}
+0.05  2015-04-12 16:00:00 CST
+        - fix module depedence
 
 0.04  2015-04-08 16:12:09 CST
         - fix perl critic test error
