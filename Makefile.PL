@@ -26,7 +26,8 @@ my %WriteMakefileArgs = (
     "JSON" => 0,
     "Mojolicious" => 0,
     "Protocol::WebSocket" => 0,
-    "Scalar::Util" => 0
+    "Scalar::Util" => 0,
+    "URI" => 0
   },
   "TEST_REQUIRES" => {
     "Test::MockModule" => 0,
@@ -34,7 +35,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.96",
     "Test::Perl::Critic" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t t/lib/*.t t/lib/feed/*.t t/lib/feed/site/*.t"
   }
@@ -53,7 +54,8 @@ my %FallbackPrereqs = (
   "Test::MockModule" => 0,
   "Test::MockObject" => 0,
   "Test::More" => "0.96",
-  "Test::Perl::Critic" => 0
+  "Test::Perl::Critic" => 0,
+  "URI" => 0
 );
 
 

@@ -43,7 +43,8 @@
             "JSON" : "0",
             "Mojolicious" : "0",
             "Protocol::WebSocket" : "0",
-            "Scalar::Util" : "0"
+            "Scalar::Util" : "0",
+            "URI" : "0"
          }
       },
       "test" : {
@@ -67,7 +68,7 @@
          "web" : "https://github.com/binary-com/perl-Finance-Bitcoin-Feed"
       }
    },
-   "version" : "0.04",
+   "version" : "0.05",
    "x_contributors" : [
       "Chylli <chylli.email@gmail.com>",
       "Fayland Lam <fayland@gmail.com>",

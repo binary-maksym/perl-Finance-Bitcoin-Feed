@@ -4,7 +4,7 @@ use Finance::Bitcoin::Feed::Site::CoinSetter::Socket;
 use Mojo::Base 'Finance::Bitcoin::Feed::Site';
 use Mojo::UserAgent;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # Module implementation here
 has ws_url => 'https://plug.coinsetter.com:3000/socket.io/1';
