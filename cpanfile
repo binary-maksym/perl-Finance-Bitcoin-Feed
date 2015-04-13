@@ -5,6 +5,7 @@ requires 'Protocol::WebSocket';
 requires 'JSON';
 requires 'Scalar::Util';
 requires 'Carp';
+requires 'URI';
 
 on test => sub {
     requires 'Test::More', '0.96';
