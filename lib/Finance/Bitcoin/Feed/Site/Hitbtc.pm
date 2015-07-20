@@ -15,7 +15,6 @@ sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
     $self->on('json', \&on_json);
-
     return $self;
 }
 

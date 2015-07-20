@@ -1,0 +1,15 @@
+#!/usr/bin/env perl -w
+
+use strict;
+use warnings;
+use FindBin qw/$Bin/;
+use lib "$Bin/../lib";
+# use Finance::Bitcoin::Feed;
+use feature qw(say);
+our $|++;
+
+
+use Finance::Bitcoin::Feed::Site::Hitbtc;
+my $site = Finance::Bitcoin::Feed::Site::Hitbtc->new;
+# $site->on('output', sub { shift; });
+$site->go;
