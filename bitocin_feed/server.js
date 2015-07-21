@@ -3,15 +3,14 @@ var _debug = 1;
 
 // var server = new BitcoinServer(socketPath);
 var fs = require('fs');
-var stream = fs.createWriteStream('./coinsetter.txt'); 
-var coinsetter = new Coinsetter(function(data){
+// var stream = fs.createWriteStream('./coinsetter.txt'); 
+// var coinsetter = new Coinsetter(function(data){
 	// server.sendAnswer('coinsetter',data);
-	stream.write(JSON.stringify(data)+"\n");
-
-});
-
-// var hitbtc = new HitBTC(function(data){
+	// stream.write(JSON.stringify(data)+"\n");
 // });
+
+// var hitbtc = new HitBTC(function(data){});
+var btcchina = new BTCChina();
 
 function Coinsetter(cb){	
 	var io  = require('./node_modules/socket.io-client/0.9.16');
@@ -37,7 +36,6 @@ function Coinsetter(cb){
 		
 		socket.on('ticker', function (data){
 			debug("Data received from Coinsetter");
-			console.log(data);
 			result = {
 				timestamp: data.bid.timeStamp,
 				ask: {price:data.ask.price,size:data.ask.size},
@@ -59,39 +57,62 @@ function Coinsetter(cb){
 	}
 }
 
-// function HitBTC(){
-// 	// var io = require('socket.io-client');
 
-// 	// var socket = io.connect('https://api.hitbtc.com:8081/trades/BTCUSD');
+function HitBTC(){
 
-// 	// socket.on('connect', function(){
-// 	// 	debug('HitBTC connected');
-// 	//     socket.on('trade', function(data){
-// 	// 		console.log(data);
-// 	// 	})
-// 	// })
+	var WebSocket = require('ws');
+	var ws = new WebSocket('ws://api.hitbtc.com:80');
+	
+	ws.on('message', function(message) {
+		var data = JSON.parse(message);
+		if(typeof(data.MarketDataIncrementalRefresh)==='object'){
+			debug(data);
+		}
+	});
 
-// var WebSocket = require('ws');
-// var ws = new WebSocket('ws://api.hitbtc.com:80');
-// ws.on('open', function() {
-//     ws.send('MarketDataIncrementalRefresh');
-// });
-// ws.on('message', function(data) {
-// 	if(data.MarketDataIncrementalRefresh.symbol==='BTCUSD'){
-// 		result = {
+	function debug(msg){
+		if(_debug){
+			console.log(msg);
+		}
+	}
+}
 
-// 		}
-// 	}
+function BTCChina(){
+	var io  = require('socket.io-client');
+	var url = 'https://websocket.btcchina.com/';
+	
+	var socket = connect();
 
-//     debug(message);
-// });
+	function connect(){
+		var io_socket = io.connect(url,{
+			reconnection: true,
+			'sync disconnect on unload': true,
+			forceNew: true,
+			reconnectionDelay: 200,
+			reconnectionDelayMax: 1500
+		});
+		return io_socket;
+	}
 
-// 	function debug(msg){
-// 		if(_debug){
-// 			console.log(msg);
-// 		}
-// 	}
-// }
+	socket.on('connect',function(){
+
+		debug("Connected to BTCChina");
+		socket.emit('subscribe', 'marketdata_cnybtc');
+		
+		socket.on('ticker', function (data){
+			debug("Data received from BTCChina");
+			if(typeof(cb)==='function'){
+				cb(data);
+			}
+		});
+	});
+
+	function debug(msg){
+		if(_debug){
+			console.log(msg);
+		}
+	}
+}
 
 
 function BitcoinServer(path){
